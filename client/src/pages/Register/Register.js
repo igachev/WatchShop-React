@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { registerAction } from "../../store/actions/authActions"
 
 function Register(props) {
 
@@ -8,6 +11,9 @@ function Register(props) {
 
     let errorsObj = {email:'',password:'',repeatPassword:''}
     const [errors,setErrors] = useState(errorsObj)
+
+    const navigation = useNavigate()
+    const dispatch = useDispatch()
 
     function onRegister(e) {
         e.preventDefault()
@@ -36,7 +42,7 @@ function Register(props) {
             return;
         }
 
-
+        dispatch(registerAction(email,password,repeatPassword,navigation))
     }
 
     return (
