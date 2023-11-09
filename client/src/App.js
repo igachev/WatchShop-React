@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { Suspense, lazy } from 'react';
+import Header from './components/Header/Header';
+
+const Login = lazy(() => import('./pages/Login/Login'))
+const Register = lazy(() => import('./pages/Register/Register'))
+const Watches = lazy(() => import('./pages/Watches/Watches'))
 
 function App() {
+
+let routes = <Routes>
+  <Route path='/' element={<Watches />} />
+  <Route path='/users/register' element={<Register />} />
+  <Route path='/users/login' element={<Login />} />
+</Routes>
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <Header />
+
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        {routes}
+      </Suspense>
+    </div>
+
     </div>
   );
 }
