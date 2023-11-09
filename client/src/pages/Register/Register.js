@@ -1,25 +1,82 @@
+import { useState } from "react"
 
 function Register(props) {
+
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [repeatPassword,setRepeatPassword] = useState('')
+
+    let errorsObj = {email:'',password:'',repeatPassword:''}
+    const [errors,setErrors] = useState(errorsObj)
+
+    function onRegister(e) {
+        e.preventDefault()
+        
+        let error = false;
+        let errorObj = {...errorsObj}
+
+        if(email === '') {
+            error = true;
+            errorObj.email = 'Email is required'
+        }
+
+        if(password === '') {
+            error = true;
+            errorObj.password = 'Password is required'
+        }
+
+        if(repeatPassword === '') {
+            error = true;
+            errorObj.repeatPassword = 'Repeat Password is required'
+        }
+
+        setErrors(errorObj)
+
+        if(error) {
+            return;
+        }
+
+
+    }
+
     return (
         <div>
             <h1>Register Page</h1>
 
         <div>
-            <form>
+            <form onSubmit={onRegister}>
 
         <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
+            <label >Email</label>
+            <input 
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} />
+
+            {errors.email && <div>{errors.email}</div>}
+
         </div>
 
         <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" />
+            <label>Password</label>
+            <input 
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
+
+            {errors.password && <div>{errors.password}</div>}
+
         </div>
 
         <div>
-            <label for="repeatPassword">Repeat Password</label>
-            <input type="password" name="repeatPassword" id="repeatPassword" />
+            <label >Repeat Password</label>
+            <input 
+            type="password"
+            value={repeatPassword}
+            onChange={(e) => setRepeatPassword(e.target.value)} />
+
+            {errors.repeatPassword && <div>{errors.repeatPassword}</div>}
+
         </div>
 
         <div>
