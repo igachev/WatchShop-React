@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { registerAction } from "../../store/actions/authActions"
 
@@ -91,10 +91,18 @@ function Register(props) {
 
             </form>
 
+            {props.errorMessage && <div>{props.errorMessage}</div>}
+
         </div>
 
         </div>
     )
 }
 
-export default Register
+const mapStateToProps = (state) => {
+    return {
+        errorMessage: state.auth.errorMessage
+    }
+}
+
+export default connect(mapStateToProps)(Register)

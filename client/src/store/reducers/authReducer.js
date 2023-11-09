@@ -1,4 +1,4 @@
-import { REGISTER_CONFIRMED_ACTION } from "../actions/authTypes";
+import { REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "../actions/authTypes";
 
 const initialState = {
     auth: {
@@ -14,7 +14,21 @@ export function authReducer(state = initialState,action) {
 
     if(action.type === REGISTER_CONFIRMED_ACTION) {
         return {
-            ...state
+            ...state,
+            auth: {
+                _id: '',
+                email: '',
+                accessToken: '',
+                isOwner: false
+            },
+            errorMessage: ''
+        }
+    }
+
+    if(action.type === REGISTER_FAILED_ACTION) {
+        return {
+            ...state,
+            errorMessage: action.payload
         }
     }
 
