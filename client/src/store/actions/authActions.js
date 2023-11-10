@@ -41,6 +41,7 @@ export function loginAction(email,password,navigation) {
     return (dispatch) => {
     login(email,password)
     .then((response) => {
+        console.log(response.data)
     saveUserDetailsInLocalStorage(response.data)
     dispatch(confirmedLoginAction(response.data))
     navigation('/')

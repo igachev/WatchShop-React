@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { loginAction } from "../../store/actions/authActions"
 
 function Login(props) {
 
@@ -8,6 +11,8 @@ const [password,setPassword] = useState('')
 const errorsObj = {email: '',password: ''}
 const [errors,setErrors] = useState(errorsObj)
 
+const navigation = useNavigate()
+const dispatch = useDispatch()
 
 function onLogin(e) {
     e.preventDefault();
@@ -30,6 +35,9 @@ function onLogin(e) {
     if(error) {
         return;
     }
+
+    dispatch(loginAction(email,password,navigation))
+
 }
 
     return (

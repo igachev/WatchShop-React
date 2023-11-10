@@ -12,5 +12,5 @@ export function login(email,password) {
 }
 
 export function saveUserDetailsInLocalStorage(userDetails) {
-    localStorage.setItem(JSON.stringify(userDetails))
+    localStorage.setItem('userDetails',JSON.stringify(userDetails))
 }
