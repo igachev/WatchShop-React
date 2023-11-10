@@ -1,3 +1,4 @@
+import { confirmedLoginAction, logoutAction } from "../store/actions/authActions"
 import axiosInstance from "./axiosInstance"
 
 
@@ -9,6 +10,18 @@ export function register(email,password,repeatPassword) {
 export function login(email,password) {
     const userData = {email,password}
     return axiosInstance.post(`/users/login`,userData)
+}
+
+export function checkAutoLogin(dispatch,navigation) {
+    let userDetailsString = localStorage.getItem('userDetails')
+
+    if(!userDetailsString) {
+        dispatch(logoutAction(navigation))
+        return;
+    }
+
+    let userDetails = JSON.parse(userDetailsString)
+    dispatch(confirmedLoginAction(userDetails))
 }
 
 export function saveUserDetailsInLocalStorage(userDetails) {

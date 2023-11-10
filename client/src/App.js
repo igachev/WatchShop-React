@@ -1,14 +1,24 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import Header from './components/Header/Header';
+import { isAuthenticated } from './store/selectors/authSelectors';
+import { connect, useDispatch } from 'react-redux';
+import { checkAutoLogin } from './services/authService';
 
 const Login = lazy(() => import('./pages/Login/Login'))
 const Register = lazy(() => import('./pages/Register/Register'))
 const Watches = lazy(() => import('./pages/Watches/Watches'))
 
-function App() {
+function App(props) {
+
+const dispatch = useDispatch()
+const navigation = useNavigate()
+
+useEffect(() => {
+  checkAutoLogin(dispatch,navigation)
+},[])
 
 let routes = <Routes>
   <Route path='/' element={<Watches />} />
@@ -30,4 +40,10 @@ let routes = <Routes>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+      isAuthenticated: isAuthenticated(state)
+    }
+}
+
+export default connect(mapStateToProps)(App);

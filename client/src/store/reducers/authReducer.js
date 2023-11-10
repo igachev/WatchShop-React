@@ -1,4 +1,4 @@
-import { LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "../actions/authTypes";
+import { LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "../actions/authTypes";
 
 const initialState = {
     auth: {
@@ -37,6 +37,19 @@ export function authReducer(state = initialState,action) {
         return {
             ...state,
             auth: action.payload,
+            errorMessage: ''
+        }
+    }
+
+    if(action.type === LOGOUT_CONFIRMED_ACTION) {
+        return {
+            ...state,
+            auth: {
+                _id: '',
+                email: '',
+                accessToken: '',
+                isOwner: false
+            },
             errorMessage: ''
         }
     }
