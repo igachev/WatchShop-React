@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginAction } from "../../store/actions/authActions"
 
@@ -72,10 +72,19 @@ function onLogin(e) {
             </div>
 
             </form>
+
+        {props.errorMessage && <div>{props.errorMessage}</div>}
+
         </div>
 
         </div>
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        errorMessage: state.auth.errorMessage
+    }
+}
+
+export default connect(mapStateToProps)(Login)

@@ -1,5 +1,5 @@
 import { login, register, saveUserDetailsInLocalStorage } from "../../services/authService";
-import { LOGIN_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "./authTypes";
+import { LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "./authTypes";
 
 
 export function confirmedRegisterAction(data) {
@@ -37,6 +37,13 @@ export function confirmedLoginAction(data) {
     }
 }
 
+export function failedLoginAction(message) {
+    return {
+        type: LOGIN_FAILED_ACTION,
+        payload: message
+    }
+}
+
 export function loginAction(email,password,navigation) {
     return (dispatch) => {
     login(email,password)
@@ -45,6 +52,9 @@ export function loginAction(email,password,navigation) {
     saveUserDetailsInLocalStorage(response.data)
     dispatch(confirmedLoginAction(response.data))
     navigation('/')
+    })
+    .catch((error) => {
+        dispatch(failedLoginAction(error.response.data.message))
     })
     }
 }
