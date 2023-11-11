@@ -1,5 +1,5 @@
 import { getAllWatches } from "../../services/watchService";
-import { GET_CONFIRMED_WATCHES } from "./watchTypes";
+import { DECREASE_CURRENT_PAGE, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data) {
@@ -9,11 +9,27 @@ export function confirmedGetAllWatchesAction(data) {
     }
 }
 
-export function getAllWatchesAction() {
+export function getAllWatchesAction(currentPage,itemsPerPage) {
     return (dispatch) => {
         getAllWatches()
         .then((response) => {
-            dispatch(confirmedGetAllWatchesAction(response.data))
+            let watches = response.data;
+            let trimStart = (currentPage - 1) * itemsPerPage
+            let trimEnd = trimStart + itemsPerPage
+            watches = watches.slice(trimStart,trimEnd)
+            dispatch(confirmedGetAllWatchesAction(watches))
         })
+    }
+}
+
+export function increasePageAction() {
+    return {
+        type: INCREASE_CURRENT_PAGE
+    }
+}
+
+export function decreasePageAction() {
+    return {
+        type: DECREASE_CURRENT_PAGE
     }
 }
