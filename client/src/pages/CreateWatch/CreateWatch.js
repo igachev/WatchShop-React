@@ -66,3 +66,5 @@ function CreateWatch(props) {
         </div>
     )
 }
+
+export default CreateWatch

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { isAuthenticated } from "../../store/selectors/authSelectors"
+import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 import { connect, useDispatch } from "react-redux"
 import { logoutAction } from "../../store/actions/authActions"
 
@@ -28,6 +28,12 @@ return (
         </>
     )}
 
+    {props.isOwner && (
+        <>
+        <Link to='/watches/create'>Create Product</Link>
+        </>
+    )}
+
     {props.isAuthenticated && (
         <>
         <button onClick={onLogout}>Logout</button>
@@ -44,7 +50,8 @@ return (
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: isAuthenticated(state)
+        isAuthenticated: isAuthenticated(state),
+        isOwner: isAdmin(state)
     }
 }
 
