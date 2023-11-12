@@ -3,8 +3,9 @@ import { bindActionCreators } from "redux"
 import { getAllWatchesAction,increasePageAction,decreasePageAction } from "../../store/actions/watchActions"
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 
-function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches}) {
+function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches,isOwner,isAuthenticated}) {
 
     useEffect(() => {
         getAllWatchesAction(currentPage, itemsPerPage);
@@ -33,11 +34,16 @@ function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increa
             <h1>Watches</h1>
 
             {watches.length > 0
+
             ? (watches.map((watch) =>
             <div key={watch._id}>
-            <div >{watch.brand}</div>
+            <p>Brand: {watch.brand}</p>
+            <p>Model: {watch.model}</p>
+            <p>Price: {watch.price}</p>
             <Link to={`/watches/${watch._id}`}>Details</Link>
+            {!isAuthenticated && <p>You must be logged in to buy</p>}
             </div>))
+
             : (<p>No watches available</p>)}
 
             <div>
@@ -54,7 +60,9 @@ const mapStateToProps = (state) => {
         watches: state.watches.watches,
         currentPage: state.watches.currentPage,
         itemsPerPage: state.watches.itemsPerPage,
-        totalPages: state.watches.totalPages
+        totalPages: state.watches.totalPages,
+        isOwner: isAdmin(state),
+        isAuthenticated: isAuthenticated(state)
     }
 }
 
