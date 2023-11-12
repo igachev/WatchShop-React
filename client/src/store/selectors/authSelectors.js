@@ -6,3 +6,10 @@ export function isAuthenticated(state) {
     }
     return false;
 }
+
+export function isAdmin(state) {
+    if(state.auth.auth.isOwner) {
+        return true;
+    }
+    return false;
+}
