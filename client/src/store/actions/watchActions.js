@@ -1,5 +1,5 @@
-import { getAllWatches, getWatch } from "../../services/watchService";
-import { DECREASE_CURRENT_PAGE, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { createWatch, getAllWatches, getWatch } from "../../services/watchService";
+import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data,totalPages) {
@@ -50,5 +50,24 @@ export function getSingleWatchAction(watchId) {
         .then((response) => {
             dispatch(confirmedGetSingleWatchAction(response.data))
         })
+    }
+}
+
+export function confirmedCreateWatchAction(watch) {
+    return {
+        type: CREATE_CONFIRMED_WATCH,
+        payload: watch
+    }
+}
+
+export function createWatchAction(brand,model,image,battery,mechanism,
+    price,strap,glass,waterResistance,navigation) {
+    return (dispatch) => {
+    createWatch(brand,model,image,battery,mechanism,
+        price,strap,glass,waterResistance)
+    .then((response) => {
+        dispatch(confirmedCreateWatchAction(response.data))
+        navigation('/')
+    })
     }
 }

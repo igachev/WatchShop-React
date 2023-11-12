@@ -9,11 +9,11 @@ export function getWatch(watchId) {
     return axiosInstance.get(`/watches/${watchId}`)
 }
 
-export function createWatch(brand,model,imageLink,battery,mechanism,
+export function createWatch(brand,model,image,battery,mechanism,
     price,strap,glass,waterResistance) {
 
 const watchData = {
-    brand,model,imageLink,battery,mechanism,
+    brand,model,image,battery,mechanism,
     price,strap,glass,waterResistance
 }
 
