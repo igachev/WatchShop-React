@@ -1,32 +1,30 @@
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { getAllWatchesAction,increasePageAction,decreasePageAction,getTotalPagesAction } from "../../store/actions/watchActions"
+import { getAllWatchesAction,increasePageAction,decreasePageAction } from "../../store/actions/watchActions"
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
-function Watches(props) {
-
-    useEffect(() => {
-        props.getTotalPagesAction()
-    }, [])
+function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches}) {
 
     useEffect(() => {
-        props.getAllWatchesAction(props.currentPage, props.itemsPerPage);
-    }, [props.currentPage, props.itemsPerPage]);
+        getAllWatchesAction(currentPage, itemsPerPage);
+
+    },[currentPage,itemsPerPage,getAllWatchesAction]);
 
     function onNext(e) {
         e.preventDefault()
-        if(props.currentPage === props.totalPages) {
+        if(currentPage === totalPages) {
             return;
         }
-        props.increasePageAction()
+        increasePageAction()
     }
 
     function onPrevious(e) {
         e.preventDefault()
-        if(props.currentPage === 1) {
+        if(currentPage === 1) {
             return;
         }
-        props.decreasePageAction()
+        decreasePageAction()
     }
 
 
@@ -34,9 +32,12 @@ function Watches(props) {
         <div>
             <h1>Watches</h1>
 
-            {props.watches.length > 0
-            ? (props.watches.map((watch) => 
-            <div key={watch._id}>{watch.brand}</div>))
+            {watches.length > 0
+            ? (watches.map((watch) =>
+            <div key={watch._id}>
+            <div >{watch.brand}</div>
+            <Link to={`/watches/${watch._id}`}>Details</Link>
+            </div>))
             : (<p>No watches available</p>)}
 
             <div>
@@ -58,7 +59,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getAllWatchesAction,increasePageAction,decreasePageAction,getTotalPagesAction},dispatch)
+    return bindActionCreators({getAllWatchesAction,increasePageAction,decreasePageAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Watches)

@@ -1,12 +1,12 @@
-import { getAllWatches } from "../../services/watchService";
-import { DECREASE_CURRENT_PAGE, GET_CONFIRMED_TOTAL_PAGES, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { getAllWatches, getWatch } from "../../services/watchService";
+import { DECREASE_CURRENT_PAGE, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
-export function confirmedGetAllWatchesAction(data) {
+export function confirmedGetAllWatchesAction(data,totalPages) {
     return {
         type: GET_CONFIRMED_WATCHES,
-        payload: data
-    }
+        payload: { watches: data, totalPages }
+    };
 }
 
 export function getAllWatchesAction(currentPage,itemsPerPage) {
@@ -14,10 +14,12 @@ export function getAllWatchesAction(currentPage,itemsPerPage) {
         getAllWatches()
         .then((response) => {
             let watches = response.data;
+            let totalWatches = watches.length;
+            let totalPages = Math.ceil(totalWatches / itemsPerPage)
             let trimStart = (currentPage - 1) * itemsPerPage
             let trimEnd = trimStart + itemsPerPage
             watches = watches.slice(trimStart,trimEnd)
-            dispatch(confirmedGetAllWatchesAction(watches))
+            dispatch(confirmedGetAllWatchesAction(watches,totalPages))
         })
     }
 }
@@ -34,21 +36,19 @@ export function decreasePageAction() {
     }
 }
 
-export function confirmedGetTotalPagesAction(data) {
+
+export function confirmedGetSingleWatchAction(watchId) {
     return {
-        type: GET_CONFIRMED_TOTAL_PAGES,
-        payload: data
+        type: GET_CONFIRMED_WATCH,
+        payload: watchId
     }
 }
 
-export function getTotalPagesAction() {
+export function getSingleWatchAction(watchId) {
     return (dispatch) => {
-        getAllWatches()
+        getWatch(watchId)
         .then((response) => {
-            let totalWatches = response.data.length;
-            let itemsPerPage = 5;
-            let totalPages = Math.ceil(totalWatches / itemsPerPage)
-            dispatch(confirmedGetTotalPagesAction(totalPages))
+            dispatch(confirmedGetSingleWatchAction(response.data))
         })
     }
 }

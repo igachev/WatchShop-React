@@ -10,6 +10,7 @@ import { checkAutoLogin } from './services/authService';
 const Login = lazy(() => import('./pages/Login/Login'))
 const Register = lazy(() => import('./pages/Register/Register'))
 const Watches = lazy(() => import('./pages/Watches/Watches'))
+const SingleWatch = lazy(() => import('./pages/SingleWatch/SingleWatch'))
 
 function App(props) {
 
@@ -22,6 +23,7 @@ useEffect(() => {
 
 let routes = <Routes>
   <Route path='/' element={<Watches />} />
+  <Route path='/watches/:watchId' element={<SingleWatch />} />
   <Route path='/users/register' element={<Register />} />
   <Route path='/users/login' element={<Login />} />
 </Routes>
