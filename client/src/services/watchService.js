@@ -19,3 +19,7 @@ const watchData = {
 
     return axiosInstance.post(`/watches/create`,watchData)
 }
+
+export function deleteWatch(watchId) {
+    return axiosInstance.delete(`/watches/${watchId}`)
+}

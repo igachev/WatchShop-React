@@ -20,6 +20,13 @@ return (
     <div>
         <h1>Watch Details</h1>
         <div>{props.watch.model}</div>
+
+        <div>
+            {props.isOwner && (
+                <button>Delete</button>
+            )}
+        </div>
+
     </div>
 
     </div>
@@ -28,7 +35,8 @@ return (
 
 const mapStateToProps = (state) => {
     return {
-        watch: state.watches.watch
+        watch: state.watches.watch,
+        isOwner: state.auth.auth.isOwner
     }
 }
 
