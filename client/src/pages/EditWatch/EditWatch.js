@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { editWatchAction } from "../../store/actions/watchActions"
 
 function EditWatch(props) {
 
@@ -21,13 +22,75 @@ const [errors,setErrors] = useState(errorsObj)
 const navigation = useNavigate()
 const dispatch = useDispatch()
 
+function onEdit(e) {
+    e.preventDefault()
+
+    let error = false;
+    const errorObj = {...errorsObj};
+
+    if(brand === '') {
+        error = true;
+        errorObj.brand = 'Brand is required'
+    }
+
+    if(model === '') {
+        error = true;
+        errorObj.model = 'Model is required'
+    }
+
+    if(image === '') {
+        error = true;
+        errorObj.image = 'Image is required'
+    }
+
+    if(battery === '') {
+        error = true;
+        errorObj.battery = 'Battery is required'
+    }
+
+    if(mechanism === '') {
+        error = true;
+        errorObj.mechanism = 'Mechanism is required'
+    }
+
+    if(price === '') {
+        error = true;
+        errorObj.price = 'Price is required'
+    }
+
+    if(strap === '') {
+        error = true;
+        errorObj.strap = 'Strap is required'
+    }
+
+    if(glass === '') {
+        error = true;
+        errorObj.glass = 'Glass is required'
+    }
+
+    if(waterResistance === '') {
+        error = true;
+        errorObj.waterResistance = 'Water Resistance is required'
+    }
+
+    setErrors(errorObj);
+
+    if(error) {
+        return;
+    }
+
+    dispatch(editWatchAction(props.watch._id,brand,model,image,battery,mechanism,
+        price,strap,glass,waterResistance,navigation));
+    
+}
+
     return (
         <div>
 
 <h1>Edit Product</h1>
 
 <div>
-    <form >
+    <form onSubmit={onEdit}>
 
 <div>
     <label>Brand:</label>
