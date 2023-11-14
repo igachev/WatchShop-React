@@ -23,3 +23,14 @@ const watchData = {
 export function deleteWatch(watchId) {
     return axiosInstance.delete(`/watches/${watchId}`)
 }
+
+export function editWatch(watchId,brand,model,image,battery,mechanism,
+    price,strap,glass,waterResistance) {
+
+const watchData = {
+    brand,model,image,battery,mechanism,
+    price,strap,glass,waterResistance
+}
+
+    return axiosInstance.put(`/watches/${watchId}`,watchData)
+}
