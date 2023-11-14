@@ -34,3 +34,11 @@ const watchData = {
 
     return axiosInstance.put(`/watches/${watchId}`,watchData)
 }
+
+export function getAllWatchesBeforeSearch() {
+    return axiosInstance.get('/watches/search')
+}
+
+export function searchByBrand(brand) {
+    return axiosInstance.post('/watches/search',{brand})
+}
