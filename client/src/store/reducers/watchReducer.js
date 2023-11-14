@@ -1,4 +1,4 @@
-import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
+import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
 
 const initialState = {
     watches: [],
@@ -46,6 +46,20 @@ export function watchReducer(state = initialState, action) {
             return {
                 ...state,
                 watches
+            }
+        }
+
+        if(action.type === DELETE_CONFIRMED_WATCH) {
+            const watches = [...state.watches]
+            const watchIndex = watches.findIndex((watch) =>
+            watch._id === action.payload
+            );
+            watches.splice(watchIndex,1);
+            
+            return {
+                ...state,
+                watches,
+                watch: {}
             }
         }
 

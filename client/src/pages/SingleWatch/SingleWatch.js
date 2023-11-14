@@ -1,18 +1,25 @@
 import { bindActionCreators } from "redux"
-import {getSingleWatchAction} from "../../store/actions/watchActions"
+import {getSingleWatchAction,deleteWatchAction} from "../../store/actions/watchActions"
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
 
 
 function SingleWatch(props) {
 
 const {watchId} = useParams()
-
+const navigation = useNavigate()
 
 useEffect(() => {
     props.getSingleWatchAction(watchId)
 },[])
+
+function onDelete(e) {
+    e.preventDefault()
+    if(window.confirm('Are you sure you want to delete this watch?')) {
+        props.deleteWatchAction(watchId,navigation)
+    }
+}
 
 return (
     <div>
@@ -23,7 +30,7 @@ return (
 
         <div>
             {props.isOwner && (
-                <button>Delete</button>
+                <button onClick={onDelete}>Delete</button>
             )}
         </div>
 
@@ -41,7 +48,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-return bindActionCreators({getSingleWatchAction},dispatch)
+return bindActionCreators({getSingleWatchAction,deleteWatchAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SingleWatch)
