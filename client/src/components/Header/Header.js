@@ -20,6 +20,7 @@ return (
 
     <div className="link-container">
     <Link to='/'>Watches</Link>
+    <Link to='/watches/search'>Search</Link>
     
     {!props.isAuthenticated && (
         <>

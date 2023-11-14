@@ -1,11 +1,12 @@
-import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
+import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
 
 const initialState = {
     watches: [],
     currentPage: 1,
     itemsPerPage: 5,
     totalPages: 0,
-    watch: {}
+    watch: {},
+    searchedWatches: []
 }
 
 export function watchReducer(state = initialState, action) {
@@ -77,6 +78,14 @@ export function watchReducer(state = initialState, action) {
             watch: watches[watchIndex]
         }
         
+       }
+
+       if(action.type === GET_CONFIRMED_WATCHES_BEFORE_SEARCH) {
+        console.log(action.payload)
+            return {
+                ...state,
+                searchedWatches: action.payload
+            }
        }
 
             return state;

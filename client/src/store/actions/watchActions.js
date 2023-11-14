@@ -1,5 +1,5 @@
-import { createWatch, deleteWatch, editWatch, getAllWatches, getWatch } from "../../services/watchService";
-import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getWatch } from "../../services/watchService";
+import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data,totalPages) {
@@ -104,6 +104,22 @@ export function editWatchAction(watchId,brand,model,image,battery,mechanism,
         .then((response) => {
             dispatch(confirmedEditWatchAction(response.data))
             navigate(`/watches/${watchId}`)
+        })
+    }
+}
+
+export function confirmedGetWatchesBeforeSearchAction(watches) {
+    return {
+        type: GET_CONFIRMED_WATCHES_BEFORE_SEARCH,
+        payload: watches
+    }
+}
+
+export function getWatchesBeforeSearchAction() {
+    return (dispatch) => {
+        getAllWatchesBeforeSearch()
+        .then((response) => {
+            dispatch(confirmedGetWatchesBeforeSearchAction(response.data))
         })
     }
 }
