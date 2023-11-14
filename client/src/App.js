@@ -12,6 +12,7 @@ const Register = lazy(() => import('./pages/Register/Register'))
 const Watches = lazy(() => import('./pages/Watches/Watches'))
 const SingleWatch = lazy(() => import('./pages/SingleWatch/SingleWatch'))
 const CreateWatch = lazy(() => import('./pages/CreateWatch/CreateWatch'))
+const EditWatch = lazy(() => import('./pages/EditWatch/EditWatch'))
 
 function App(props) {
 
@@ -25,6 +26,7 @@ useEffect(() => {
 let routes = <Routes>
   <Route path='/' element={<Watches />} />
   <Route path='/watches/:watchId' element={<SingleWatch />} />
+  <Route path='/watches/:watchId/edit' element={<EditWatch />} />
   <Route path='/watches/create' element={<CreateWatch />} />
   <Route path='/users/register' element={<Register />} />
   <Route path='/users/login' element={<Login />} />

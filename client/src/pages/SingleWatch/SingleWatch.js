@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux"
 import {getSingleWatchAction,deleteWatchAction} from "../../store/actions/watchActions"
 import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
 
 
@@ -30,7 +30,10 @@ return (
 
         <div>
             {props.isOwner && (
+                <>
                 <button onClick={onDelete}>Delete</button>
+                <Link to={`/watches/${props.watch._id}/edit`}>Edit</Link>
+                </>
             )}
         </div>
 
