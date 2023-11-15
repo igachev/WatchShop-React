@@ -27,3 +27,9 @@ export function checkAutoLogin(dispatch,navigation) {
 export function saveUserDetailsInLocalStorage(userDetails) {
     localStorage.setItem('userDetails',JSON.stringify(userDetails))
 }
+
+export function watchesFromUserCart(userId) {
+    let userDetails = localStorage.getItem('userDetails')
+    let userId = userDetails?.userId;
+    return axiosInstance.get(`/users/${userId}/cart`)
+}
