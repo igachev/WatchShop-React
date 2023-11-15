@@ -14,6 +14,7 @@ const SingleWatch = lazy(() => import('./pages/SingleWatch/SingleWatch'))
 const CreateWatch = lazy(() => import('./pages/CreateWatch/CreateWatch'))
 const EditWatch = lazy(() => import('./pages/EditWatch/EditWatch'))
 const SearchWatches = lazy(() => import('./pages/SearchWatches/SearchWatches'))
+const UserCart = lazy(() => import('./pages/UserCart/UserCart'))
 
 function App(props) {
 
@@ -32,6 +33,7 @@ let routes = <Routes>
   <Route path='/watches/search' element={<SearchWatches />} />
   <Route path='/users/register' element={<Register />} />
   <Route path='/users/login' element={<Login />} />
+  <Route path='/users/cart' element={<UserCart />} />
 </Routes>
 
   return (

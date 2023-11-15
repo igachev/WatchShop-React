@@ -28,8 +28,8 @@ export function saveUserDetailsInLocalStorage(userDetails) {
     localStorage.setItem('userDetails',JSON.stringify(userDetails))
 }
 
-export function watchesFromUserCart(userId) {
+export function watchesFromUserCart() {
     let userDetails = localStorage.getItem('userDetails')
-    let userId = userDetails?.userId;
+    let userId = userDetails?._id;
     return axiosInstance.get(`/users/${userId}/cart`)
 }
