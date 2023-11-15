@@ -29,7 +29,11 @@ export function saveUserDetailsInLocalStorage(userDetails) {
 }
 
 export function watchesFromUserCart() {
-    let userDetails = localStorage.getItem('userDetails')
+    let userDetailsString = localStorage.getItem('userDetails')
+    let userDetails;
+    if(userDetailsString) {
+        userDetails = JSON.parse(userDetailsString)
+    }
     let userId = userDetails?._id;
-    return axiosInstance.get(`/users/${userId}/cart`)
+        return axiosInstance.get(`/users/${userId}/cart`)
 }

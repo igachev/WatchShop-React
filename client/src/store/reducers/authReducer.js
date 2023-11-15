@@ -1,4 +1,4 @@
-import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "../actions/authTypes";
+import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "../actions/authTypes";
 
 const initialState = {
     auth: {
@@ -63,6 +63,14 @@ export function authReducer(state = initialState,action) {
             ...state,
             shopCart,
             errorMessage: ''
+        }
+    }
+
+    if(action.type === GET_CONFIRMED_WATCHES_FROM_CART) {
+        const shopCart = action.payload
+        return {
+            ...state,
+            shopCart
         }
     }
 
