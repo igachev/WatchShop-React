@@ -42,3 +42,7 @@ export function getAllWatchesBeforeSearch() {
 export function searchByBrand(brand) {
     return axiosInstance.post('/watches/search',{searchValue:brand})
 }
+
+export function addWatchToCart(watchId) {
+    return axiosInstance.post(`/watches/${watchId}`,{watchId})
+}
