@@ -46,6 +46,7 @@ return (
                 {props.isAuthenticated && !props.isOwner && (
                     <>
                     <button onClick={onAddToCart}>Add To Cart</button>
+                    {props.errorMessage && <p>{props.errorMessage}</p>}
                     </>
                 )}
 
@@ -63,7 +64,8 @@ const mapStateToProps = (state) => {
     return {
         watch: state.watches.watch,
         isOwner: isAdmin(state),
-        isAuthenticated: isAuthenticated(state)
+        isAuthenticated: isAuthenticated(state),
+        errorMessage: state.auth.errorMessage
     }
 }
 
