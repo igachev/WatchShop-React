@@ -1,5 +1,6 @@
 import { bindActionCreators } from "redux"
 import {getSingleWatchAction,deleteWatchAction} from "../../store/actions/watchActions"
+import { addWatchToCartAction } from "../../store/actions/authActions"
 import { useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
@@ -22,6 +23,11 @@ function onDelete(e) {
     }
 }
 
+function onAddToCart(e) {
+    e.preventDefault()
+    props.addWatchToCartAction(watchId)
+}
+
 return (
     <div>
 
@@ -39,7 +45,7 @@ return (
 
                 {props.isAuthenticated && !props.isOwner && (
                     <>
-                    <button>Add To Cart</button>
+                    <button onClick={onAddToCart}>Add To Cart</button>
                     </>
                 )}
 
@@ -62,7 +68,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-return bindActionCreators({getSingleWatchAction,deleteWatchAction},dispatch)
+return bindActionCreators({getSingleWatchAction,deleteWatchAction,addWatchToCartAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SingleWatch)

@@ -4,3 +4,4 @@ export const REGISTER_FAILED_ACTION = '[register action] failed register'
 export const LOGIN_CONFIRMED_ACTION = '[login action] confirmed login'
 export const LOGIN_FAILED_ACTION = '[login action] failed login'
 export const LOGOUT_CONFIRMED_ACTION = '[logout action] confirmed logout'
+export const ADD_CONFIRMED_WATCH_TO_CART = "[user action] add watch to user's cart"

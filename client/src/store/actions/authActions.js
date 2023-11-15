@@ -1,5 +1,6 @@
 import { login, register, saveUserDetailsInLocalStorage } from "../../services/authService";
-import { LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "./authTypes";
+import { addWatchToCart } from "../../services/watchService";
+import { ADD_CONFIRMED_WATCH_TO_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "./authTypes";
 
 
 export function confirmedRegisterAction(data) {
@@ -64,5 +65,21 @@ export function logoutAction(navigation) {
     navigation('/')
     return {
         type: LOGOUT_CONFIRMED_ACTION
+    }
+}
+
+export function confirmedAddWatchToCartAction(watchId) {
+    return {
+        type: ADD_CONFIRMED_WATCH_TO_CART,
+        payload: watchId
+    }
+}
+
+export function addWatchToCartAction(watchId) {
+    return (dispatch) => {
+        addWatchToCart(watchId)
+        .then((response) => {
+            dispatch(confirmedAddWatchToCartAction(watchId))
+        })
     }
 }
