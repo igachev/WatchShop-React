@@ -40,5 +40,5 @@ export function getAllWatchesBeforeSearch() {
 }
 
 export function searchByBrand(brand) {
-    return axiosInstance.post('/watches/search',{brand})
+    return axiosInstance.post('/watches/search',{searchValue:brand})
 }

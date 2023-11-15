@@ -1,17 +1,22 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { connect } from "react-redux"
-import { getWatchesBeforeSearchAction } from "../../store/actions/watchActions"
+import { getWatchesBeforeSearchAction,searchedWatchesAction } from "../../store/actions/watchActions"
 import { Link } from "react-router-dom"
 import { isAuthenticated } from "../../store/selectors/authSelectors"
 import { bindActionCreators } from "redux"
 
 function SearchWatches(props) {
 
-
-
 useEffect(() => {
 props.getWatchesBeforeSearchAction()
-},[])
+},[]);
+
+const [brand,setBrand] = useState('')
+
+function searchWatches(e) {
+    e.preventDefault()
+    props.searchedWatchesAction(brand)
+}
 
 return (
     <div>
@@ -20,10 +25,13 @@ return (
 
     <div>
 
-    <form>
+    <form onSubmit={searchWatches}>
         <div>
             <label>Brand Name:</label>
-            <input type="text" />
+            <input 
+            type="text"
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)} />
         </div>
 
         <div>
@@ -64,7 +72,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getWatchesBeforeSearchAction},dispatch)
+    return bindActionCreators({getWatchesBeforeSearchAction,searchedWatchesAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SearchWatches)
