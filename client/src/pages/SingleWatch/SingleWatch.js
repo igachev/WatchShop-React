@@ -3,6 +3,7 @@ import {getSingleWatchAction,deleteWatchAction} from "../../store/actions/watchA
 import { useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
+import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 
 
 function SingleWatch(props) {
@@ -35,7 +36,16 @@ return (
                 <Link to={`/watches/${props.watch._id}/edit`}>Edit</Link>
                 </>
             )}
+
+                {props.isAuthenticated && !props.isOwner && (
+                    <>
+                    <button>Add To Cart</button>
+                    </>
+                )}
+
         </div>
+
+
 
     </div>
 
@@ -46,7 +56,8 @@ return (
 const mapStateToProps = (state) => {
     return {
         watch: state.watches.watch,
-        isOwner: state.auth.auth.isOwner
+        isOwner: isAdmin(state),
+        isAuthenticated: isAuthenticated(state)
     }
 }
 
