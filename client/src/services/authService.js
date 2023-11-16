@@ -47,3 +47,14 @@ export function removeWatchFromUserCart(watchId) {
     let userId = userDetails?._id;
     return axiosInstance.delete(`/users/${userId}/cart/${watchId}`)
 }
+
+export function addToUserPurchaseHistory(watchId,name,phone,address,quantity) {
+    let userDetailsString = localStorage.getItem('userDetails')
+    let userDetails;
+    if(userDetailsString) {
+        userDetails = JSON.parse(userDetailsString)
+    }
+    let userId = userDetails?._id;
+    let userData = {name,phone,address,quantity}
+    return axiosInstance.post(`/users/${userId}/cart/${watchId}`,userData)
+}
