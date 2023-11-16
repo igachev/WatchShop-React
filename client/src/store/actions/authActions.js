@@ -1,6 +1,6 @@
-import { login, register, saveUserDetailsInLocalStorage, watchesFromUserCart } from "../../services/authService";
+import { login, register, removeWatchFromUserCart, saveUserDetailsInLocalStorage, watchesFromUserCart } from "../../services/authService";
 import { addWatchToCart } from "../../services/watchService";
-import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION } from "./authTypes";
+import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION, REMOVE_CONFIRMED_WATCH_FROM_CART } from "./authTypes";
 
 
 export function confirmedRegisterAction(data) {
@@ -110,6 +110,22 @@ export function getWatchesFromCartAction() {
         watchesFromUserCart()
         .then((response) => {
             dispatch(confirmedGetWatchesFromCartAction(response.data))
+        })
+    }
+}
+
+export function confirmedRemoveWatchFromUserCartAction(watchId) {
+    return {
+        type: REMOVE_CONFIRMED_WATCH_FROM_CART,
+        payload: watchId
+    }
+}
+
+export function removeWatchFromUserCartAction(watchId) {
+    return (dispatch) => {
+        removeWatchFromUserCart(watchId)
+        .then((response) => {
+            dispatch(confirmedRemoveWatchFromUserCartAction(watchId))
         })
     }
 }

@@ -1,6 +1,6 @@
 import { bindActionCreators } from "redux"
 import { isAuthenticated } from "../../store/selectors/authSelectors"
-import { getWatchesFromCartAction } from "../../store/actions/authActions"
+import { getWatchesFromCartAction,removeWatchFromUserCartAction } from "../../store/actions/authActions"
 import { useEffect } from "react"
 import { connect } from "react-redux"
 
@@ -9,6 +9,11 @@ function UserCart(props) {
 useEffect(() => {
 props.getWatchesFromCartAction()
 },[])
+
+function onRemove(e,watchId) {
+    e.preventDefault()
+    props.removeWatchFromUserCartAction(watchId)
+}
 
 return (
     <div>
@@ -53,11 +58,12 @@ return (
 
                 <div>
                     <button type="submit">Buy</button>
+                    <button onClick={(e) => onRemove(e,watch._id)}>Remove From Cart</button>
                 </div>
             </form>
 
         <div>
-            <button>Remove From Cart</button>
+            
         </div>
 
         </div>
@@ -81,7 +87,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getWatchesFromCartAction},dispatch)
+    return bindActionCreators({getWatchesFromCartAction,removeWatchFromUserCartAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserCart)
