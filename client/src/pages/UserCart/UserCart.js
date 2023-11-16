@@ -15,6 +15,9 @@ const [phone,setPhone] = useState('')
 const [address,setAddress] = useState('')
 const [quantity,setQuantity] = useState('')
 
+const errorsObj = {name:'',phone:'',address:'',quantity:''}
+const [errors,setErrors] = useState(errorsObj)
+
 function onRemove(e,watchId) {
     e.preventDefault()
     props.removeWatchFromUserCartAction(watchId)
@@ -22,6 +25,36 @@ function onRemove(e,watchId) {
 
 function onBuy(e,price,watchId) {
     e.preventDefault()
+
+    let error = false;
+    const errorObj = {...errorsObj}
+
+    if(name === '') {
+        error = true;
+        errorObj.name = 'Name is required'
+    }
+
+    if(phone === '') {
+        error = true;
+        errorObj.phone = 'Phone is required'
+    }
+
+    if(address === '') {
+        error = true;
+        errorObj.address = 'Address is required'
+    }
+
+    if(quantity === '') {
+        error = true;
+        errorObj.quantity = 'Quantity is required'
+    }
+
+    setErrors(errorObj)
+
+    if(error) {
+        return;
+    }
+
     props.buyWatchAction(watchId,name,phone,address,quantity,price)
 }
 
@@ -54,6 +87,8 @@ return (
         onChange={(e) => setName(e.target.value)} />
                 </div>
 
+        {errors.name && <div>{errors.name}</div>}
+
                 <div>
         <label>Phone:</label>
         <input 
@@ -61,6 +96,8 @@ return (
         value={phone}
         onChange={(e) => setPhone(e.target.value)} />
                 </div>
+
+        {errors.phone && <div>{errors.phone}</div>}
 
                 <div>
         <label>Address:</label>
@@ -70,6 +107,8 @@ return (
         onChange={(e) => setAddress(e.target.value)} />
                 </div>
 
+        {errors.address && <div>{errors.address}</div>}
+
                 <div>
         <label>Quantity:</label>
         <input 
@@ -77,6 +116,8 @@ return (
         value={quantity}
         onChange={(e) => setQuantity(e.target.value)} />
                 </div>
+
+        {errors.quantity && <div>{errors.quantity}</div>}
 
                 <div>
                     <button type="submit">Buy</button>
