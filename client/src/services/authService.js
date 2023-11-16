@@ -58,3 +58,13 @@ export function addToUserPurchaseHistory(watchId,name,phone,address,quantity,pri
     let userData = {name,phone,address,quantity,price}
     return axiosInstance.post(`/users/${userId}/cart/${watchId}`,userData)
 }
+
+export function getUserPurchaseHistory() {
+    let userDetailsString = localStorage.getItem('userDetails')
+    let userDetails;
+    if(userDetailsString) {
+        userDetails = JSON.parse(userDetailsString)
+    }
+    let userId = userDetails?._id;
+    return axiosInstance.get(`/users/${userId}/purchaseHistory`)
+}
