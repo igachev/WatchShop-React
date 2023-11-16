@@ -38,6 +38,7 @@ return (
     {props.isAuthenticated && (
         <>
         <Link to='/users/cart'>Cart</Link>
+        <Link to='/users/purchaseHistory'>Purchase History</Link>
         <button onClick={onLogout}>Logout</button>
         </>
     )}
