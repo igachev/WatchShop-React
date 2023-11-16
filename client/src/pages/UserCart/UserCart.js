@@ -19,9 +19,48 @@ return (
     {props.shopCart.length > 0 
     ? props.shopCart.map((watch) =>
     <div key={watch._id}>
-        <p>Brand: {watch.brand}</p>
+        <h4>Brand: {watch.brand}</h4>
         <p>Model: {watch.model}</p>
         <p>Price: {watch.price}</p>
+        <p>Strap: {watch.strap}</p>
+        <p>Glass: {watch.glass}</p>
+        <p>Water Resistance: {watch.waterResistance}</p>
+
+        <div>
+
+            <h4>Buyer Details</h4>
+            <form>
+
+                <div>
+        <label>Name:</label>
+        <input type="text" />
+                </div>
+
+                <div>
+        <label>Phone:</label>
+        <input type="text" />
+                </div>
+
+                <div>
+        <label>Address:</label>
+        <input type="text" />
+                </div>
+
+                <div>
+        <label>Quantity:</label>
+        <input type="number" />
+                </div>
+
+                <div>
+                    <button type="submit">Buy</button>
+                </div>
+            </form>
+
+        <div>
+            <button>Remove From Cart</button>
+        </div>
+
+        </div>
 
     </div>
     )
