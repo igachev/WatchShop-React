@@ -48,13 +48,13 @@ export function removeWatchFromUserCart(watchId) {
     return axiosInstance.delete(`/users/${userId}/cart/${watchId}`)
 }
 
-export function addToUserPurchaseHistory(watchId,name,phone,address,quantity) {
+export function addToUserPurchaseHistory(watchId,name,phone,address,quantity,price) {
     let userDetailsString = localStorage.getItem('userDetails')
     let userDetails;
     if(userDetailsString) {
         userDetails = JSON.parse(userDetailsString)
     }
     let userId = userDetails?._id;
-    let userData = {name,phone,address,quantity}
+    let userData = {name,phone,address,quantity,price}
     return axiosInstance.post(`/users/${userId}/cart/${watchId}`,userData)
 }
