@@ -101,7 +101,8 @@ return updateUserPurchaseHistory
 exports.getPurchaseHistory = async (userId) => {
     const user = await User.findById(userId).populate({
         path: 'userPurchaseHistory.watchId',
-        select: 'brand model'
+        select: 'brand model',
+        
       });
     if(!user) {
         throw new Error('Invalid user')
@@ -112,13 +113,17 @@ exports.getPurchaseHistory = async (userId) => {
 exports.getAllPurchaseHistory = async () => {
     const users = await User.find({}).populate({
         path: 'userPurchaseHistory.watchId',
-        select: 'brand model'
+        select: 'brand model',
       });
     
       let allPurchaseHistory = [];
       users.forEach(user => {
         allPurchaseHistory = allPurchaseHistory.concat(user.userPurchaseHistory);
       });
+
+      if(allPurchaseHistory.length > 0) {
+        allPurchaseHistory = allPurchaseHistory.sort((a,b) => a.date - b.date)
+      }
     
       return allPurchaseHistory;
 }

@@ -33,10 +33,11 @@ return (
         <>
         <Link to='/watches/create'>Create Product</Link>
         <Link to='/users/adminHistory'>All Purchases</Link>
+        <button onClick={onLogout}>Logout</button>
         </>
     )}
 
-    {props.isAuthenticated && (
+    {props.isAuthenticated && !props.isOwner && (
         <>
         <Link to='/users/cart'>Cart</Link>
         <Link to='/users/purchaseHistory'>Purchase History</Link>
