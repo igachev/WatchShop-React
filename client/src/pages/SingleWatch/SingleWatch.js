@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
 import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
+import StarRating from "../../components/Star/StarRating"
 
 
 function SingleWatch(props) {
@@ -45,6 +46,7 @@ return (
 
                 {props.isAuthenticated && !props.isOwner && (
                     <>
+                    <StarRating />
                     <button onClick={onAddToCart}>Add To Cart</button>
                     {props.errorMessage && <p>{props.errorMessage}</p>}
                     </>
