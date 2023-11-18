@@ -46,3 +46,13 @@ export function searchByBrand(brand) {
 export function addWatchToCart(watchId) {
     return axiosInstance.post(`/watches/${watchId}`,{watchId})
 }
+
+export function rate(watchId,userRating) {
+    let userDetailsString = localStorage.getItem('userDetails')
+    let userDetails;
+    if(userDetailsString) {
+        userDetails = JSON.parse(userDetailsString)
+    }
+    let userId = userDetails?._id;
+    return axiosInstance.post(`/watches/${watchId}/rating`,{userId,watchId,userRating})
+}
