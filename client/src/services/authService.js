@@ -68,3 +68,7 @@ export function getUserPurchaseHistory() {
     let userId = userDetails?._id;
     return axiosInstance.get(`/users/${userId}/purchaseHistory`)
 }
+
+export function adminPurchaseHistory() {
+    return axiosInstance.get('/users/purchaseHistory')
+}
