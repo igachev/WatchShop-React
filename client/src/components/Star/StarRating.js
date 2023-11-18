@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import Star from './Star';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { addRatingToWatchAction } from '../../store/actions/watchActions';
 
-export default function StarRating() {
+ function StarRating(props) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
-  function handleRating(rating) {
-    setRating(rating);
+  function handleRating(userRating) {
+    setRating(userRating);
+    props.addRatingToWatchAction(props.watchId,userRating)
   }
   return (
     <div >
@@ -15,12 +19,18 @@ export default function StarRating() {
         <Star
           key={i}
           full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
-       //   onRate={() => handleRating(i + 1)}
+          onRate={() => handleRating(i + 1)}
           onHoverIn={() => setTempRating(i + 1)}
           onHoverOut={() => setTempRating(0)}
         />
       ))}
-      <div>{tempRating || rating || ''}</div>
+      <div>{tempRating || ''}</div>
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({addRatingToWatchAction},dispatch)
+}
+
+export default connect(null,mapDispatchToProps)(StarRating)

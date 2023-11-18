@@ -1,5 +1,5 @@
-import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getWatch, searchByBrand } from "../../services/watchService";
-import { CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getWatch, rate, searchByBrand } from "../../services/watchService";
+import { ADD_CONFIRMED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data,totalPages) {
@@ -138,4 +138,20 @@ export function searchedWatchesAction(brand) {
             dispatch(confirmedSearchedWatchesAction(response.data))
         })
     }
+}
+
+export function confirmedAddRatingToWatchAction(watchId) {
+    return {
+        type: ADD_CONFIRMED_RATING_TO_WATCH,
+        payload: watchId
+    }
+}
+
+export function addRatingToWatchAction(watchId,userRating) {
+    return (dispatch) => {
+        rate(watchId,userRating)
+        .then((response) => {
+            dispatch(confirmedAddRatingToWatchAction(watchId))
+        })
+ }
 }

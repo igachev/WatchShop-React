@@ -46,7 +46,7 @@ return (
 
                 {props.isAuthenticated && !props.isOwner && (
                     <>
-                    <StarRating />
+                    <StarRating watchId={props.watch._id} />
                     <button onClick={onAddToCart}>Add To Cart</button>
                     {props.errorMessage && <p>{props.errorMessage}</p>}
                     </>
