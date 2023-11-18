@@ -32,6 +32,7 @@ return (
     {props.isOwner && (
         <>
         <Link to='/watches/create'>Create Product</Link>
+        <Link to='/users/adminHistory'>All Purchases</Link>
         </>
     )}
 
