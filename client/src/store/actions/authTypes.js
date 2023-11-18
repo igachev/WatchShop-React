@@ -10,3 +10,4 @@ export const GET_CONFIRMED_WATCHES_FROM_CART = '[user action] returns all watche
 export const REMOVE_CONFIRMED_WATCH_FROM_CART = '[user action] removes a watch from user cart'
 export const BUY_CONFIRMED_WATCH = '[user action] buy a watch and place it in purchaseHistory'
 export const GET_CONFIRMED_USER_PURCHASE_HISTORY = '[user action] returns user purchase history'
+export const GET_CONFIRMED_ADMIN_PURCHASE_HISTORY = '[admin action] Display all bought watches to the admin only'

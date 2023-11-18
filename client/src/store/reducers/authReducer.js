@@ -1,4 +1,4 @@
-import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, BUY_CONFIRMED_WATCH, GET_CONFIRMED_USER_PURCHASE_HISTORY, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION, REMOVE_CONFIRMED_WATCH_FROM_CART } from "../actions/authTypes";
+import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, BUY_CONFIRMED_WATCH, GET_CONFIRMED_ADMIN_PURCHASE_HISTORY, GET_CONFIRMED_USER_PURCHASE_HISTORY, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION, REMOVE_CONFIRMED_WATCH_FROM_CART } from "../actions/authTypes";
 
 const initialState = {
     auth: {
@@ -9,6 +9,7 @@ const initialState = {
     },
     shopCart: [],
     userPurchaseHistory: [],
+    adminHistory: [],
     errorMessage: ''
 }
 
@@ -55,6 +56,7 @@ export function authReducer(state = initialState,action) {
             },
             shopCart: [],
             userPurchaseHistory: [],
+            adminHistory: [],
             errorMessage: ''
         }
     }
@@ -102,6 +104,13 @@ export function authReducer(state = initialState,action) {
         return {
             ...state,
             userPurchaseHistory: action.payload
+        }
+    }
+
+    if(action.type === GET_CONFIRMED_ADMIN_PURCHASE_HISTORY) {
+        return {
+            ...state,
+            adminHistory: action.payload
         }
     }
 

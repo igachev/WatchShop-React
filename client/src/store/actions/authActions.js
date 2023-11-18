@@ -1,6 +1,6 @@
-import { addToUserPurchaseHistory, getUserPurchaseHistory, login, register, removeWatchFromUserCart, saveUserDetailsInLocalStorage, watchesFromUserCart } from "../../services/authService";
+import { addToUserPurchaseHistory, adminPurchaseHistory, getUserPurchaseHistory, login, register, removeWatchFromUserCart, saveUserDetailsInLocalStorage, watchesFromUserCart } from "../../services/authService";
 import { addWatchToCart } from "../../services/watchService";
-import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, BUY_CONFIRMED_WATCH, GET_CONFIRMED_USER_PURCHASE_HISTORY, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION, REMOVE_CONFIRMED_WATCH_FROM_CART } from "./authTypes";
+import { ADD_CONFIRMED_WATCH_TO_CART, ADD_FAILED_WATCH_TO_CART, BUY_CONFIRMED_WATCH, GET_CONFIRMED_ADMIN_PURCHASE_HISTORY, GET_CONFIRMED_USER_PURCHASE_HISTORY, GET_CONFIRMED_WATCHES_FROM_CART, LOGIN_CONFIRMED_ACTION, LOGIN_FAILED_ACTION, LOGOUT_CONFIRMED_ACTION, REGISTER_CONFIRMED_ACTION, REGISTER_FAILED_ACTION, REMOVE_CONFIRMED_WATCH_FROM_CART } from "./authTypes";
 
 
 export function confirmedRegisterAction(data) {
@@ -162,6 +162,22 @@ export function getUserPurchaseHistoryAction() {
         getUserPurchaseHistory()
         .then((response) => {
             dispatch(confirmedGetUserPurchaseHistoryAction(response.data))
+        })
+    }
+}
+
+export function confirmedGetAdminPurchaseHistoryAction(watches) {
+    return {
+        type: GET_CONFIRMED_ADMIN_PURCHASE_HISTORY,
+        payload: watches
+    }
+}
+
+export function getAdminPurchaseHistoryAction() {
+    return (dispatch) => {
+        adminPurchaseHistory()
+        .then((response) => {
+            dispatch(confirmedGetAdminPurchaseHistoryAction(response.data))
         })
     }
 }
