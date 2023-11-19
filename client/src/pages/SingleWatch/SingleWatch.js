@@ -1,5 +1,5 @@
 import { bindActionCreators } from "redux"
-import {getSingleWatchAction,deleteWatchAction} from "../../store/actions/watchActions"
+import {getSingleWatchAction,deleteWatchAction,getWatchRatingAction} from "../../store/actions/watchActions"
 import { addWatchToCartAction } from "../../store/actions/authActions"
 import { useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -14,7 +14,8 @@ const {watchId} = useParams()
 const navigation = useNavigate()
 
 useEffect(() => {
-    props.getSingleWatchAction(watchId)
+    props.getSingleWatchAction(watchId);
+    props.getWatchRatingAction(watchId);
 },[])
 
 function onDelete(e) {
@@ -35,6 +36,7 @@ return (
     <div>
         <h1>Watch Details</h1>
         <div>{props.watch.model}</div>
+        <div>{props.watchRating}</div>
 
         <div>
             {props.isOwner && (
@@ -67,12 +69,13 @@ const mapStateToProps = (state) => {
         watch: state.watches.watch,
         isOwner: isAdmin(state),
         isAuthenticated: isAuthenticated(state),
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        watchRating: state.watches.watchRating
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-return bindActionCreators({getSingleWatchAction,deleteWatchAction,addWatchToCartAction},dispatch)
+return bindActionCreators({getSingleWatchAction,deleteWatchAction,addWatchToCartAction,getWatchRatingAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SingleWatch)

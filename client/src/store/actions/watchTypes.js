@@ -11,3 +11,4 @@ export const GET_CONFIRMED_WATCHES_BEFORE_SEARCH = '[watch action] returns all w
 export const GET_CONFIRMED_SEARCHED_WATCHES = '[watch action] returns watches by brand'
 export const ADD_CONFIRMED_RATING_TO_WATCH = '[watch action] add rating to a watch'
 export const ADD_FAILED_RATING_TO_WATCH = '[watch action] failed to add rating to a watch'
+export const GET_CONFIRMED_WATCH_RATING = '[watch action] returns watch rating'

@@ -1,5 +1,5 @@
-import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getWatch, rate, searchByBrand } from "../../services/watchService";
-import { ADD_CONFIRMED_RATING_TO_WATCH, ADD_FAILED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getRate, getWatch, rate, searchByBrand } from "../../services/watchService";
+import { ADD_CONFIRMED_RATING_TO_WATCH, ADD_FAILED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, GET_CONFIRMED_WATCH_RATING, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data,totalPages) {
@@ -159,6 +159,10 @@ export function addRatingToWatchAction(watchId,userRating) {
         rate(watchId,userRating)
         .then((response) => {
             dispatch(confirmedAddRatingToWatchAction(watchId))
+            getRate(watchId)
+            .then((response) => {
+                dispatch(confirmedGetWatchRatingAction(response.data))
+            })
         })
         .catch((error) => {
             dispatch(failedAddRatingToWatchAction(error.response.data.message))
@@ -167,4 +171,20 @@ export function addRatingToWatchAction(watchId,userRating) {
             }, 1000);
         })
  }
+}
+
+export function confirmedGetWatchRatingAction(watchRating) {
+    return {
+        type: GET_CONFIRMED_WATCH_RATING,
+        payload: watchRating
+    }
+}
+
+export function getWatchRatingAction(watchId) {
+    return (dispatch) => {
+        getRate(watchId)
+        .then((response) => {
+            dispatch(confirmedGetWatchRatingAction(response.data))
+        })
+    }
 }

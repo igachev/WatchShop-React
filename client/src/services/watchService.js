@@ -56,3 +56,7 @@ export function rate(watchId,userRating) {
     let userId = userDetails?._id;
     return axiosInstance.post(`/watches/${watchId}/rating`,{userId,watchId,userRating})
 }
+
+export function getRate(watchId) {
+    return axiosInstance.get(`/watches/${watchId}/rating`)
+}

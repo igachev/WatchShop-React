@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Star from './Star';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addRatingToWatchAction } from '../../store/actions/watchActions';
+import { addRatingToWatchAction,getWatchRatingAction } from '../../store/actions/watchActions';
 
  function StarRating(props) {
   const [rating, setRating] = useState(0);
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({addRatingToWatchAction},dispatch)
+  return bindActionCreators({addRatingToWatchAction,getWatchRatingAction},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(StarRating)
