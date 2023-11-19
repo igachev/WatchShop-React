@@ -25,12 +25,19 @@ import { addRatingToWatchAction } from '../../store/actions/watchActions';
         />
       ))}
       <div>{tempRating || ''}</div>
+      {props.errorMessage && <div>{props.errorMessage}</div>}
     </div>
   );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.watches.errorMessage
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({addRatingToWatchAction},dispatch)
 }
 
-export default connect(null,mapDispatchToProps)(StarRating)
+export default connect(mapStateToProps,mapDispatchToProps)(StarRating)

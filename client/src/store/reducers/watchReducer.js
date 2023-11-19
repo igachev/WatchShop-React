@@ -1,4 +1,4 @@
-import { ADD_CONFIRMED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
+import { ADD_CONFIRMED_RATING_TO_WATCH, ADD_FAILED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "../actions/watchTypes";
 
 const initialState = {
     watches: [],
@@ -6,7 +6,8 @@ const initialState = {
     itemsPerPage: 5,
     totalPages: 0,
     watch: {},
-    searchedWatches: []
+    searchedWatches: [],
+    errorMessage: ''
 }
 
 export function watchReducer(state = initialState, action) {
@@ -99,6 +100,13 @@ export function watchReducer(state = initialState, action) {
         return {
             ...state
         }
+       }
+
+       if(action.type === ADD_FAILED_RATING_TO_WATCH) {
+            return {
+                ...state,
+                errorMessage: action.payload
+            }
        }
 
             return state;

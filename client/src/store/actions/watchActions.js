@@ -1,5 +1,5 @@
 import { createWatch, deleteWatch, editWatch, getAllWatches, getAllWatchesBeforeSearch, getWatch, rate, searchByBrand } from "../../services/watchService";
-import { ADD_CONFIRMED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
+import { ADD_CONFIRMED_RATING_TO_WATCH, ADD_FAILED_RATING_TO_WATCH, CREATE_CONFIRMED_WATCH, DECREASE_CURRENT_PAGE, DELETE_CONFIRMED_WATCH, EDIT_CONFIRMED_WATCH, GET_CONFIRMED_SEARCHED_WATCHES, GET_CONFIRMED_WATCH, GET_CONFIRMED_WATCHES, GET_CONFIRMED_WATCHES_BEFORE_SEARCH, INCREASE_CURRENT_PAGE } from "./watchTypes";
 
 
 export function confirmedGetAllWatchesAction(data,totalPages) {
@@ -147,11 +147,24 @@ export function confirmedAddRatingToWatchAction(watchId) {
     }
 }
 
+export function failedAddRatingToWatchAction(message) {
+    return {
+        type: ADD_FAILED_RATING_TO_WATCH,
+        payload: message
+    }
+}
+
 export function addRatingToWatchAction(watchId,userRating) {
     return (dispatch) => {
         rate(watchId,userRating)
         .then((response) => {
             dispatch(confirmedAddRatingToWatchAction(watchId))
+        })
+        .catch((error) => {
+            dispatch(failedAddRatingToWatchAction(error.response.data.message))
+            setTimeout(() => {
+                dispatch(failedAddRatingToWatchAction(''))
+            }, 1000);
         })
  }
 }
