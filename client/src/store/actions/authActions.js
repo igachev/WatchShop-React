@@ -26,6 +26,9 @@ return (dispatch) => {
     })
     .catch((error) => {
         dispatch(failedRegisterAction(error.response.data.message))
+        setTimeout(() => {
+            dispatch(failedRegisterAction(''))
+        }, 2000);
     })
 }
 }
@@ -56,6 +59,9 @@ export function loginAction(email,password,navigation) {
     })
     .catch((error) => {
         dispatch(failedLoginAction(error.response.data.message))
+        setTimeout(() => {
+            dispatch(failedLoginAction(''))
+        }, 2000);
     })
     }
 }
