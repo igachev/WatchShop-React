@@ -1,0 +1,29 @@
+
+.container {
+    background-color: #A9A9A9;
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.container .img-logo {
+    width: 90px;
+    margin-left: 3rem;
+    margin-right: 4rem;
+    
+}
+
+
+.link-container ul {
+    display: flex;
+}
+
+.link-container ul li {
+    list-style: none;
+    margin-right: 1rem;
+}
+
+.link-container ul li a {
+    text-decoration: none;
+    color: #FDF5E6;
+}
