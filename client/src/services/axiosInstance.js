@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
     const accessToken = state.auth.auth.accessToken;
     config.headers = {
         ...config.headers,
-        Authorization: `${accessToken}`
+        Authorization: `Bearer ${accessToken}`
     }
     return config
 }) 

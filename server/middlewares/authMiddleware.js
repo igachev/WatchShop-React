@@ -4,8 +4,8 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 require("dotenv").config();
 
 exports.authentication = async (req,res,next) => {
-    if(req.headers['authorization'] !== undefined) {
-    const token = req.headers['authorization'];
+  if(req.headers['authorization'] !== undefined) {
+    const token = req.headers['authorization'].split(' ')[1];
  
     if(token) {
         try {
