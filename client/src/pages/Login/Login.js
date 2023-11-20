@@ -2,6 +2,7 @@ import { useState } from "react"
 import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginAction } from "../../store/actions/authActions"
+import "./Login.css"
 
 function Login(props) {
 
@@ -41,10 +42,12 @@ function onLogin(e) {
 }
 
     return (
-        <div>
+        <div className="login-outer-container">
             <h1>Login Page</h1>
+        <div className="login-container">
+            
 
-        <div>
+        <div className="login-form-container">
             <form onSubmit={onLogin}>
 
             <div>
@@ -55,7 +58,7 @@ function onLogin(e) {
                 onChange={(e) => setEmail(e.target.value)} />
             </div>
 
-            {errors.email && <div>{errors.email}</div>}
+            {errors.email && <div className="validation-error">{errors.email}</div>}
 
             <div>
                 <label>Password:</label>
@@ -65,18 +68,19 @@ function onLogin(e) {
                 onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            {errors.password && <div>{errors.password}</div>}
+            {errors.password && <div className="validation-error">{errors.password}</div>}
 
-            <div>
+            <div className="login-btn">
                 <button type="submit">Login</button>
             </div>
 
             </form>
 
-        {props.errorMessage && <div>{props.errorMessage}</div>}
+        {props.errorMessage && <div className="validation-error">{props.errorMessage}</div>}
 
         </div>
 
+        </div>
         </div>
     )
 }
