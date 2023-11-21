@@ -4,6 +4,7 @@ import { getAllWatchesAction,increasePageAction,decreasePageAction } from "../..
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
+import "./Watches.css"
 
 function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches,isOwner,isAuthenticated}) {
 
@@ -30,23 +31,28 @@ function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increa
 
 
     return (
-        <div>
+        <div className="outer-watches-container">
             <h1>Watches</h1>
 
-            {watches.length > 0
+           <div className="watches-container">
+
+           {watches.length > 0
 
             ? (watches.map((watch) =>
-            <div key={watch._id}>
+            <div key={watch._id} className="watches-card">
+            <div className="watches-img-container"><img src={watch.image} alt="watch" /></div>
             <p>Brand: {watch.brand}</p>
             <p>Model: {watch.model}</p>
-            <p>Price: {watch.price}</p>
+            <p>Price:  € {watch.price}</p>
             <Link to={`/watches/${watch._id}`}>Details</Link>
             {!isAuthenticated && <p>You must be logged in to buy</p>}
             </div>))
 
             : (<p>No watches available</p>)}
 
-            <div>
+           </div>
+
+            <div className="watches-btns">
             <button onClick={onPrevious}>Previous Page</button>
             <button onClick={onNext}>Next Page</button>
             </div>
