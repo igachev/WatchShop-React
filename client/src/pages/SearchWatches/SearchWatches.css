@@ -1,0 +1,105 @@
+.outer-seach-container {
+    min-height: 600px;
+    
+}
+
+.outer-search-container h1 {
+    text-align: center;
+    letter-spacing: 0.3rem;
+    background-color: #C0C0C0;
+}
+
+.search-form-container {
+    background-color: #C0C0C0;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.search-form-container label {
+    margin-right: 0.6rem;
+}
+
+.search-form-container input {
+    padding: 0.6rem;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-style: solid;
+}
+
+.search-form-container button {
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border-style: solid;
+    transition: all 0.5s linear;
+}
+
+.search-form-container button:hover {
+    background-color: black;
+    color: #C0C0C0;
+}
+
+.results-outer-container {
+    background-color: #C0C0C0;
+}
+
+.results-outer-container .result-p {
+    text-align: center;
+    font-size: 20px;
+    padding: 1rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    box-shadow: 1px 1px 3px 2px black;
+    border-radius: 0.5rem;
+    max-width: 98%;
+    min-height: 400px;
+    margin: auto;
+    background-color: #696969;
+}
+
+.search-container .search-watches-card .search-img-container {
+    height: 150px;
+}
+
+.search-container .search-watches-card .search-img-container img {
+    border-radius: 0.5rem;
+}
+
+.search-container .search-watches-card {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: #C0C0C0;
+    min-height: 350px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 1px -1px 3px 3px rgb(198, 200, 218);
+    margin: 0.8rem 0;
+}
+
+.search-container .search-watches-card a {
+    text-decoration: none;
+    color: #fff;
+    
+    border-radius: 0.5rem;
+    background-color: green;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s linear;
+}
+
+.search-container .search-watches-card a:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+.search-container .search-watches-card p {
+    margin: 0.4rem 0.3rem;
+}

@@ -36,7 +36,7 @@
     border-radius: 0.5rem;
     background-color: #C0C0C0;
     min-height: 350px;
-    max-width: 250px;
+    width: 200px;
     text-align: center;
     box-shadow: 1px -1px 3px 3px rgb(198, 200, 218);
     margin: 0.8rem 0;

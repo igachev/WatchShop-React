@@ -4,6 +4,7 @@ import { getWatchesBeforeSearchAction,searchedWatchesAction } from "../../store/
 import { Link } from "react-router-dom"
 import { isAuthenticated } from "../../store/selectors/authSelectors"
 import { bindActionCreators } from "redux"
+import "./SearchWatches.css"
 
 function SearchWatches(props) {
 
@@ -19,12 +20,13 @@ function searchWatches(e) {
 }
 
 return (
-    <div>
+    <div className="outer-search-container">
 
     <h1>Search By Brand</h1>
 
-    <div>
+    
 
+    <div className="search-form-container">
     <form onSubmit={searchWatches}>
         <div>
             <label>Brand Name:</label>
@@ -38,14 +40,19 @@ return (
             <button type="submit">Search</button>
         </div>
     </form>
+    </div>
 
-    <div>
-        <p>Results:</p>
+    <div className="results-outer-container">
+        <p className="result-p">Results:</p>
+
+        <div className="search-container">
 
         {props.searchedWatches.length > 0
+        
 
 ? (props.searchedWatches.map((watch) =>
-<div key={watch._id}>
+<div key={watch._id} className="search-watches-card">
+<div className="search-img-container"><img src={watch.image} alt="watch" /></div>
 <p>Brand: {watch.brand}</p>
 <p>Model: {watch.model}</p>
 <p>Price: {watch.price}</p>
