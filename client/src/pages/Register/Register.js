@@ -2,6 +2,7 @@ import { useState } from "react"
 import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { registerAction } from "../../store/actions/authActions"
+import "./Register.css"
 
 function Register(props) {
 
@@ -46,10 +47,12 @@ function Register(props) {
     }
 
     return (
-        <div>
+        <div className="register-outer-container">
             <h1>Register Page</h1>
 
-        <div>
+        <div className="register-container">
+
+        <div className="register-form-container">
             <form onSubmit={onRegister}>
 
         <div>
@@ -59,7 +62,7 @@ function Register(props) {
             value={email}
             onChange={(e) => setEmail(e.target.value)} />
 
-            {errors.email && <div>{errors.email}</div>}
+            {errors.email && <div className="validation-error">{errors.email}</div>}
 
         </div>
 
@@ -70,7 +73,7 @@ function Register(props) {
             value={password}
             onChange={(e) => setPassword(e.target.value)} />
 
-            {errors.password && <div>{errors.password}</div>}
+            {errors.password && <div className="validation-error">{errors.password}</div>}
 
         </div>
 
@@ -81,17 +84,19 @@ function Register(props) {
             value={repeatPassword}
             onChange={(e) => setRepeatPassword(e.target.value)} />
 
-            {errors.repeatPassword && <div>{errors.repeatPassword}</div>}
+            {errors.repeatPassword && <div className="validation-error">{errors.repeatPassword}</div>}
 
         </div>
 
-        <div>
+        <div className="register-btn">
             <button type="submit">Register</button>
         </div>
 
             </form>
 
-            {props.errorMessage && <div>{props.errorMessage}</div>}
+            {props.errorMessage && <div className="validation-error">{props.errorMessage}</div>}
+
+        </div>
 
         </div>
 

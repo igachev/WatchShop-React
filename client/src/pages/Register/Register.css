@@ -1,17 +1,17 @@
-.login-outer-container {
+.register-outer-container {
     background-color: #C0C0C0;
     
     text-align: center;
    
 }
 
-.login-outer-container h1 {
+.register-outer-container h1 {
     padding-top: 2rem;
     letter-spacing: 0.3rem;
-    animation: login-text-animation 800ms ease;
+    animation: register-text-animation 800ms ease;
 }
 
-.login-container {
+.register-container {
     min-height: 600px;
     background-color: #C0C0C0;
     color: black;
@@ -20,17 +20,17 @@
     align-items: center;
 }
 
-.login-form-container {
+.register-form-container {
     text-align: right;
-    animation: login-form-animation 1000ms ease-in-out;
+    animation: register-form-animation 1000ms ease-in-out;
 }
 
-.login-form-container label {
+.register-form-container label {
 font-size: 1.3rem;
 margin-right: 0.5rem;
 }
 
-.login-form-container input {
+.register-form-container input {
     padding: 0.6rem;
     border-radius: 12px;
     font-size: 1.5rem;
@@ -38,17 +38,17 @@ margin-right: 0.5rem;
     border-style: solid;
 }
 
-.login-form-container .validation-error {
+.register-form-container .validation-error {
     color: #DC143C;
     text-align: center;
 }
 
-.login-form-container .login-btn {
+.register-form-container .register-btn {
     text-align: center;
     
 }
 
-.login-form-container .login-btn button {
+.register-form-container .register-btn button {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     padding: 1rem 2rem;
@@ -58,22 +58,22 @@ margin-right: 0.5rem;
     transition: all 0.5s linear;
 }
 
-.login-form-container .login-btn button:hover {
+.register-form-container .register-btn button:hover {
     background-color: black;
     color: #C0C0C0;
 }
 
-@keyframes login-form-animation {
+@keyframes register-form-animation {
     0% {
-      transform: translateX(-200%);
+      transform: translateY(100%);
     }
 
     100% {
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 
-  @keyframes login-text-animation {
+  @keyframes register-text-animation {
     0% {
       transform: scale(0);
     }
