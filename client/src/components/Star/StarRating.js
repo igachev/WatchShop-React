@@ -3,6 +3,7 @@ import Star from './Star';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addRatingToWatchAction,getWatchRatingAction } from '../../store/actions/watchActions';
+import "./StarRating.css"
 
  function StarRating(props) {
   const [rating, setRating] = useState(0);
@@ -24,8 +25,8 @@ import { addRatingToWatchAction,getWatchRatingAction } from '../../store/actions
           onHoverOut={() => setTempRating(0)}
         />
       ))}
-      <div>{tempRating || ''}</div>
-      {props.errorMessage && <div>{props.errorMessage}</div>}
+      <span className='temp-rating'>{tempRating || ''}</span>
+      {props.errorMessage && <span className='error-msg'>{props.errorMessage}</span>}
     </div>
   );
 }

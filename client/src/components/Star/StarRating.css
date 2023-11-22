@@ -1,0 +1,7 @@
+.temp-rating, .error-msg {
+    margin: 0 0.7rem;
+}
+
+.error-msg {
+    color: #DC143C;
+}

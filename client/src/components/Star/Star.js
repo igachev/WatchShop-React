@@ -13,9 +13,9 @@ export default function Star(props) {
       onMouseEnter={props.onHoverIn} 
       onMouseLeave={props.onHoverOut}>
         {props.full ? (
-         <FontAwesomeIcon icon={faStar} size="xl" style={{color: "#96a61c",}} />
+         <FontAwesomeIcon icon={faStar} size="xl" style={{color: "#96a61c",cursor:"pointer"}} />
         ) : (
-        <FontAwesomeIcon icon={faStar} size="xl" style={{color: "#1a1a19",}} />
+        <FontAwesomeIcon icon={faStar} size="xl" style={{color: "#1a1a19",cursor:"pointer"}} />
         )}
           
       </span>
