@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { connect } from "react-redux"
 import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 import StarRating from "../../components/Star/StarRating"
+import "./SingleWatch.css"
 
 
 function SingleWatch(props) {
@@ -31,26 +32,33 @@ function onAddToCart(e) {
 }
 
 return (
-    <div>
+    <div className="outer-details-container">
 
-    <div>
-        <h1>Watch Details</h1>
-        <div>{props.watch.model}</div>
-        <div>{props.watchRating}</div>
+    <div className="inner-details-container">
+        <div className="details-image"><img src={props.watch.image} alt="watch" /></div>
+        <h4>Brand: {props.watch.brand}</h4>
+        <p>Model: {props.watch.model}</p>
+        <p>Battery: {props.watch.battery}</p>
+        <p>Mechanism: {props.watch.mechanism}</p>
+        <p>Price: € {props.watch.price}</p>
+        <p>Strap: {props.watch.strap}</p>
+        <p>Glass: {props.watch.glass}</p>
+        <p>Water Resistance: {props.watch.waterResistance}</p>
+        <p>Average Rating: {props.watchRating}</p>
 
-        <div>
+        <div className="details-btns">
             {props.isOwner && (
                 <>
-                <button onClick={onDelete}>Delete</button>
-                <Link to={`/watches/${props.watch._id}/edit`}>Edit</Link>
+                <button className="delete-btn" onClick={onDelete}>Delete</button>
+                <Link className="edit-btn" to={`/watches/${props.watch._id}/edit`}>Edit</Link>
                 </>
             )}
 
                 {props.isAuthenticated && !props.isOwner && (
                     <>
                     <StarRating watchId={props.watch._id} />
-                    <button onClick={onAddToCart}>Add To Cart</button>
-                    {props.errorMessage && <p>{props.errorMessage}</p>}
+                    <button className="cart-btn" onClick={onAddToCart}>Add To Cart</button>
+                    {props.errorMessage && <p className="error-msg">{props.errorMessage}</p>}
                     </>
                 )}
 

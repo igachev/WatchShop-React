@@ -1,0 +1,86 @@
+
+.outer-details-container {
+    min-height: 900px;
+    background-color: #696969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-details-container {
+    background-color: #C0C0C0;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 3px 1px black;
+    padding: 1rem;
+    max-width: 420px;
+}
+
+.inner-details-container .details-image {
+    max-width: 400px;
+    height: 400px;
+}
+
+.inner-details-container h4 {
+    padding-top: 0.2rem;
+}
+
+.inner-details-container p {
+    padding: 0.2rem 0;
+}
+
+.details-btns {
+    
+}
+
+.details-btns .cart-btn {
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.5rem 1rem;
+    margin: 0.6rem 0;
+    border-radius: 10px;
+    border:none;
+    background-color: green;
+    color: #fff;
+    transition: all 0.5s linear;
+}
+
+.details-btns .cart-btn:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+.details-btns .error-msg {
+    color: #DC143C;
+}
+
+.details-btns .delete-btn {
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.5rem 1rem;
+    margin: 0.6rem 0;
+    border-radius: 10px;
+    border:none;
+    background-color: red;
+    color: #fff;
+    transition: all 0.5s linear;
+    margin-right: 0.8rem;
+}
+
+.details-btns .delete-btn:hover {
+    background-color: rgb(170, 39, 39);
+}
+
+.details-btns .edit-btn {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0.6rem 0;
+    border-radius: 10px;
+    color: #fff;
+    background-color: cadetblue;
+    transition: all 0.5s linear;
+    font-size: 0.9rem;
+}
+
+.details-btns .edit-btn:hover {
+    background-color: rgb(111, 184, 187);
+}

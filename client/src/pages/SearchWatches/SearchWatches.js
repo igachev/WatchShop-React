@@ -55,7 +55,7 @@ return (
 <div className="search-img-container"><img src={watch.image} alt="watch" /></div>
 <p>Brand: {watch.brand}</p>
 <p>Model: {watch.model}</p>
-<p>Price: {watch.price}</p>
+<p>Price: € {watch.price}</p>
 <Link to={`/watches/${watch._id}`}>Details</Link>
 {!props.isAuthenticated && <p>You must be logged in to buy</p>}
 </div>))
