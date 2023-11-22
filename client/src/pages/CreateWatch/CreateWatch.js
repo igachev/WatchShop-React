@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { createWatchAction } from "../../store/actions/watchActions"
+import "./CreateWatch.css"
 
 function CreateWatch(props) {
 
@@ -85,10 +86,12 @@ function onCreate(e) {
 }
 
     return (
-        <div>
-            <h1>Add New Product</h1>
+        <div className="outer">
+<h1>Add New Product</h1>
+        <div className="outer-create-container">
+            
 
-        <div>
+        <div className="create-container">
             <form onSubmit={onCreate}>
 
         <div>
@@ -98,7 +101,7 @@ function onCreate(e) {
             onChange={(e) => setBrand(e.target.value)} />
         </div>
 
-        {errors.brand && <div>{errors.brand}</div>}
+        {errors.brand && <div className="validation-error">{errors.brand}</div>}
 
         <div>
             <label>Model:</label>
@@ -107,7 +110,7 @@ function onCreate(e) {
             onChange={(e) => setModel(e.target.value)} />
         </div>
 
-        {errors.model && <div>{errors.model}</div>}
+        {errors.model && <div className="validation-error">{errors.model}</div>}
 
         <div>
             <label>Image Link:</label>
@@ -116,7 +119,7 @@ function onCreate(e) {
             onChange={(e) => setImage(e.target.value)} />
         </div>
 
-        {errors.image && <div>{errors.image}</div>}
+        {errors.image && <div className="validation-error">{errors.image}</div>}
 
         <div>
             <label>Battery:</label>
@@ -125,7 +128,7 @@ function onCreate(e) {
             onChange={(e) => setBattery(e.target.value)} />
         </div>
 
-        {errors.battery && <div>{errors.battery}</div>}
+        {errors.battery && <div className="validation-error">{errors.battery}</div>}
 
         <div>
             <label>Mechanism:</label>
@@ -139,7 +142,7 @@ function onCreate(e) {
             </select>
         </div>
 
-        {errors.mechanism && <div>{errors.mechanism}</div>}
+        {errors.mechanism && <div className="validation-error">{errors.mechanism}</div>}
 
         <div>
             <label>Price:</label>
@@ -149,7 +152,7 @@ function onCreate(e) {
             onChange={(e) => setPrice(e.target.value)} />
         </div>
 
-        {errors.price && <div>{errors.price}</div>}
+        {errors.price && <div className="validation-error">{errors.price}</div>}
 
         <div>
             <label>Strap:</label>
@@ -159,7 +162,7 @@ function onCreate(e) {
             onChange={(e) => setStrap(e.target.value)} />
         </div>
 
-        {errors.strap && <div>{errors.strap}</div>}
+        {errors.strap && <div className="validation-error">{errors.strap}</div>}
 
         <div>
             <label>Glass:</label>
@@ -169,7 +172,7 @@ function onCreate(e) {
             onChange={(e) => setGlass(e.target.value)} />
         </div>
 
-        {errors.glass && <div>{errors.glass}</div>}
+        {errors.glass && <div className="validation-error">{errors.glass}</div>}
 
         <div>
             <label>Water Resistance:</label>
@@ -179,15 +182,16 @@ function onCreate(e) {
             onChange={(e) => setWaterResistance(e.target.value)} />
         </div>
 
-        {errors.waterResistance && <div>{errors.waterResistance}</div>}
+        {errors.waterResistance && <div className="validation-error">{errors.waterResistance}</div>}
 
-        <div>
+        <div className="create-btn">
             <button type="submit">Create</button>
         </div>
 
             </form>
         </div>
 
+        </div>
         </div>
     )
 }
