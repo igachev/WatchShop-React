@@ -2,6 +2,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { getAdminPurchaseHistoryAction } from "../../store/actions/authActions"
 import { useEffect } from "react"
+import "./AdminPurchaseHistory.css";
 
 function AdminPurchaseHistory(props) {
 
@@ -10,7 +11,7 @@ useEffect(() => {
 },[])
 
 return (
-    <div>
+    <div className="admin-purchase-history-container">
         <h1>All purchases made by users</h1>
 
     <div>

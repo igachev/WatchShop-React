@@ -1,11 +1,10 @@
-
-.purchase-history-container {
+.admin-purchase-history-container {
     background-color: #696969;
     min-height: 600px;
     padding: 2rem 0;
 }
 
-.purchase-history-container h1 {
+.admin-purchase-history-container h1 {
     text-align: center;
     letter-spacing: 0.3rem;
     padding: 0.3rem 0;
@@ -37,7 +36,7 @@ table td {
 
 @media(max-width:600px) {
 
-    .purchase-history-container h1 {
+    .admin-purchase-history-container h1 {
         font-size: 15px;
     }
 
