@@ -1,0 +1,35 @@
+
+.purchase-history-container {
+    background-color: #696969;
+    min-height: 600px;
+}
+
+.purchase-history-container h1 {
+    text-align: center;
+    letter-spacing: 0.3rem;
+    padding: 0.3rem 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #C0C0C0;
+}
+
+table th , table td {
+    border: 1px solid #ddd;
+    padding: 0.3rem;
+    
+}
+
+table thead th {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+table td {
+    word-break: break-all;
+}

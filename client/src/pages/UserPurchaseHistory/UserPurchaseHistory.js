@@ -2,6 +2,7 @@ import { bindActionCreators } from "redux"
 import { getUserPurchaseHistoryAction } from "../../store/actions/authActions"
 import { connect } from "react-redux"
 import { useEffect } from "react"
+import "./UserPurchaseHistory.css"
 
 function UserPurchaseHistory(props) {
 
@@ -10,7 +11,7 @@ useEffect(() => {
 },[])
 
     return (
-        <div>
+        <div className="purchase-history-container">
             <h1>Purchase History</h1>
 
         <div>
