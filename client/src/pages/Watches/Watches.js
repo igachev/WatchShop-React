@@ -5,8 +5,10 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 import "./Watches.css"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
-function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches,isOwner,isAuthenticated}) {
+function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increasePageAction,decreasePageAction,watches,isOwner,isAuthenticated,isLoading}) {
 
     useEffect(() => {
         getAllWatchesAction(currentPage, itemsPerPage);
@@ -32,6 +34,8 @@ function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increa
 
     return (
         <div className="outer-watches-container">
+
+            {isLoading && <LoadingSpinner />}
             <h1>Watches</h1>
 
            <div className="watches-container">
@@ -68,7 +72,8 @@ const mapStateToProps = (state) => {
         itemsPerPage: state.watches.itemsPerPage,
         totalPages: state.watches.totalPages,
         isOwner: isAdmin(state),
-        isAuthenticated: isAuthenticated(state)
+        isAuthenticated: isAuthenticated(state),
+        isLoading: isLoading(state)
     }
 }
 

@@ -21,13 +21,16 @@ const AdminPurchaseHistory = lazy(() => import('./pages/AdminPurchaseHistory/Adm
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'))
 
 
+
 function App(props) {
 
 const dispatch = useDispatch()
 const navigation = useNavigate()
 
+
 useEffect(() => {
-  checkAutoLogin(dispatch,navigation)
+
+    checkAutoLogin(dispatch, navigation);
 },[])
 
 let routes = 
@@ -90,14 +93,12 @@ let routes =
   return (
     <div>
      <Header />
-
+    
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        
-        {routes}
-        
-   
-      </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+         
+          {routes}
+        </Suspense>
     </div>
 
     </div>
