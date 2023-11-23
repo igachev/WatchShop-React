@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { editWatchAction } from "../../store/actions/watchActions"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import "./EditWatch.css"
 
 function EditWatch(props) {
 
@@ -87,11 +88,13 @@ function onEdit(e) {
 }
 
     return (
-        <div>
+        <div className="outer-edit">
 {props.isLoading && <LoadingSpinner />}
 <h1>Edit Product</h1>
 
-<div>
+<div className="outer-edit-container">
+
+<div className="edit-container">
     <form onSubmit={onEdit}>
 
 <div>
@@ -101,7 +104,7 @@ function onEdit(e) {
     onChange={(e) => setBrand(e.target.value)} />
 </div>
 
-{errors.brand && <div>{errors.brand}</div>}
+{errors.brand && <div className="validation-error">{errors.brand}</div>}
 
 <div>
     <label>Model:</label>
@@ -110,7 +113,7 @@ function onEdit(e) {
     onChange={(e) => setModel(e.target.value)} />
 </div>
 
-{errors.model && <div>{errors.model}</div>}
+{errors.model && <div className="validation-error">{errors.model}</div>}
 
 <div>
     <label>Image Link:</label>
@@ -119,7 +122,7 @@ function onEdit(e) {
     onChange={(e) => setImage(e.target.value)} />
 </div>
 
-{errors.image && <div>{errors.image}</div>}
+{errors.image && <div className="validation-error">{errors.image}</div>}
 
 <div>
     <label>Battery:</label>
@@ -128,7 +131,7 @@ function onEdit(e) {
     onChange={(e) => setBattery(e.target.value)} />
 </div>
 
-{errors.battery && <div>{errors.battery}</div>}
+{errors.battery && <div className="validation-error">{errors.battery}</div>}
 
 <div>
     <label>Mechanism:</label>
@@ -142,7 +145,7 @@ function onEdit(e) {
     </select>
 </div>
 
-{errors.mechanism && <div>{errors.mechanism}</div>}
+{errors.mechanism && <div className="validation-error">{errors.mechanism}</div>}
 
 <div>
     <label>Price:</label>
@@ -152,7 +155,7 @@ function onEdit(e) {
     onChange={(e) => setPrice(e.target.value)} />
 </div>
 
-{errors.price && <div>{errors.price}</div>}
+{errors.price && <div className="validation-error">{errors.price}</div>}
 
 <div>
     <label>Strap:</label>
@@ -162,7 +165,7 @@ function onEdit(e) {
     onChange={(e) => setStrap(e.target.value)} />
 </div>
 
-{errors.strap && <div>{errors.strap}</div>}
+{errors.strap && <div className="validation-error">{errors.strap}</div>}
 
 <div>
     <label>Glass:</label>
@@ -172,7 +175,7 @@ function onEdit(e) {
     onChange={(e) => setGlass(e.target.value)} />
 </div>
 
-{errors.glass && <div>{errors.glass}</div>}
+{errors.glass && <div className="validation-error">{errors.glass}</div>}
 
 <div>
     <label>Water Resistance:</label>
@@ -182,13 +185,15 @@ function onEdit(e) {
     onChange={(e) => setWaterResistance(e.target.value)} />
 </div>
 
-{errors.waterResistance && <div>{errors.waterResistance}</div>}
+{errors.waterResistance && <div className="validation-error">{errors.waterResistance}</div>}
 
-<div>
+<div className="edit-btn">
     <button type="submit">Edit</button>
 </div>
 
     </form>
+</div>
+
 </div>
 
         </div>
