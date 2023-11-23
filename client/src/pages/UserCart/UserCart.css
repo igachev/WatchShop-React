@@ -1,0 +1,19 @@
+.outer-user-cart {
+    min-height: 600px;
+    background-color: #696969;
+    padding: 1.5rem;
+}
+
+.outer-user-cart h1 {
+    text-align: center;
+}
+
+.user-cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    
+}
+
