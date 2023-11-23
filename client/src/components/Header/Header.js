@@ -39,7 +39,7 @@ return (
         <>
         <li><Link to='/watches/create'>Create Product</Link></li>
         <li><Link to='/users/adminHistory'>All Purchases</Link></li>
-        <li><button onClick={onLogout}>Logout</button></li>
+        <li><button onClick={onLogout} className="logout-btn">Logout</button></li>
         </>
     )}
 
@@ -47,7 +47,7 @@ return (
         <>
         <li><Link to='/users/cart'>Cart</Link></li>
         <li><Link to='/users/purchaseHistory'>Purchase History</Link></li>
-        <li><button onClick={onLogout}>Logout</button></li>
+        <li><button onClick={onLogout} className="logout-btn">Logout</button></li>
         </>
     )}
     </ul>

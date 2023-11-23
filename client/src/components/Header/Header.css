@@ -10,9 +10,11 @@
     width: 90px;
     margin-left: 3rem;
     margin-right: 4rem;
-    
 }
 
+.container .img-logo a img {
+    border-radius: 30px;
+}
 
 .link-container ul {
     display: flex;
@@ -26,4 +28,31 @@
 .link-container ul li a {
     text-decoration: none;
     color: #FDF5E6;
+}
+
+.link-container .logout-btn {
+    border: none;
+    color: #FDF5E6;
+    background-color: #A9A9A9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@media(max-width:660px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    .container .img-logo {
+        margin-top: 15px;
+        min-width: 90px;
+    }
+
+    .link-container ul {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
 }
