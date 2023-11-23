@@ -7,6 +7,8 @@ import { connect } from "react-redux"
 import { isAdmin, isAuthenticated } from "../../store/selectors/authSelectors"
 import StarRating from "../../components/Star/StarRating"
 import "./SingleWatch.css"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 
 function SingleWatch(props) {
@@ -33,7 +35,7 @@ function onAddToCart(e) {
 
 return (
     <div className="outer-details-container">
-
+        {props.isLoading && <LoadingSpinner />}
     <div className="inner-details-container">
         <div className="details-image"><img src={props.watch.image} alt="watch" /></div>
         <h4>Brand: {props.watch.brand}</h4>
@@ -78,7 +80,8 @@ const mapStateToProps = (state) => {
         isOwner: isAdmin(state),
         isAuthenticated: isAuthenticated(state),
         errorMessage: state.auth.errorMessage,
-        watchRating: state.watches.watchRating
+        watchRating: state.watches.watchRating,
+        isLoading: isLoading(state)
     }
 }
 

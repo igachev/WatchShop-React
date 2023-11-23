@@ -5,6 +5,8 @@ import { Link } from "react-router-dom"
 import { isAuthenticated } from "../../store/selectors/authSelectors"
 import { bindActionCreators } from "redux"
 import "./SearchWatches.css"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 function SearchWatches(props) {
 
@@ -21,7 +23,7 @@ function searchWatches(e) {
 
 return (
     <div className="outer-search-container">
-
+        {props.isLoading && <LoadingSpinner />}
     <h1>Search By Brand</h1>
 
     
@@ -74,7 +76,8 @@ return (
 const mapStateToProps = (state) => {
     return {
         searchedWatches: state.watches.searchedWatches,
-        isAuthenticated: isAuthenticated(state)
+        isAuthenticated: isAuthenticated(state),
+        isLoading: isLoading(state)
     }
 }
 

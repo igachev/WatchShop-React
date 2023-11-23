@@ -3,6 +3,8 @@ import { isAuthenticated } from "../../store/selectors/authSelectors"
 import { getWatchesFromCartAction,removeWatchFromUserCartAction,buyWatchAction } from "../../store/actions/authActions"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 function UserCart(props) {
 
@@ -60,6 +62,7 @@ function onBuy(e,price,watchId) {
 
 return (
     <div>
+        {props.isLoading && <LoadingSpinner />}
         <h1>User Cart</h1>
 
     <div>
@@ -145,7 +148,8 @@ return (
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: isAuthenticated(state),
-        shopCart: state.auth.shopCart
+        shopCart: state.auth.shopCart,
+        isLoading: isLoading(state)
     }
 }
 

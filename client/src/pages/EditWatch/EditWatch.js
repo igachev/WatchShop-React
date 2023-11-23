@@ -2,6 +2,8 @@ import { useState } from "react"
 import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { editWatchAction } from "../../store/actions/watchActions"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 function EditWatch(props) {
 
@@ -86,7 +88,7 @@ function onEdit(e) {
 
     return (
         <div>
-
+{props.isLoading && <LoadingSpinner />}
 <h1>Edit Product</h1>
 
 <div>
@@ -195,7 +197,8 @@ function onEdit(e) {
 
 const mapStateToProps = (state) => {
     return {
-        watch: state.watches.watch
+        watch: state.watches.watch,
+        isLoading: isLoading(state)
     }
 }
 

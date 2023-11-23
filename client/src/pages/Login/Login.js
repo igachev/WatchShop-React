@@ -3,6 +3,8 @@ import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginAction } from "../../store/actions/authActions"
 import "./Login.css"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 function Login(props) {
 
@@ -43,6 +45,7 @@ function onLogin(e) {
 
     return (
         <div className="login-outer-container">
+            {props.isLoading && <LoadingSpinner />}
             <h1>Login Page</h1>
         <div className="login-container">
             
@@ -87,7 +90,8 @@ function onLogin(e) {
 
 const mapStateToProps = (state) => {
     return {
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        isLoading: isLoading(state)
     }
 }
 

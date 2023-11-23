@@ -3,6 +3,8 @@ import { connect, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { registerAction } from "../../store/actions/authActions"
 import "./Register.css"
+import { isLoading } from "../../store/selectors/spinnerSelectors"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 function Register(props) {
 
@@ -48,6 +50,7 @@ function Register(props) {
 
     return (
         <div className="register-outer-container">
+            {props.isLoading && <LoadingSpinner />}
             <h1>Register Page</h1>
 
         <div className="register-container">
@@ -106,7 +109,8 @@ function Register(props) {
 
 const mapStateToProps = (state) => {
     return {
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        isLoading: isLoading(state)
     }
 }
 

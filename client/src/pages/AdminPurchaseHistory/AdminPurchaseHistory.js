@@ -3,6 +3,8 @@ import { bindActionCreators } from "redux"
 import { getAdminPurchaseHistoryAction } from "../../store/actions/authActions"
 import { useEffect } from "react"
 import "./AdminPurchaseHistory.css";
+import { isLoading } from "../../store/selectors/spinnerSelectors";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function AdminPurchaseHistory(props) {
 
@@ -12,6 +14,7 @@ useEffect(() => {
 
 return (
     <div className="admin-purchase-history-container">
+        {props.isLoading && <LoadingSpinner />}
         <h1>All purchases made by users</h1>
 
     <div>
@@ -62,7 +65,8 @@ return (
 
 const mapStateToProps = (state) => {
     return {
-        adminHistory: state.auth.adminHistory
+        adminHistory: state.auth.adminHistory,
+        isLoading: isLoading(state)
     }
 }
 
