@@ -1,0 +1,42 @@
+
+.footer-container {
+    background-color: #A9A9A9;
+    min-height: 4.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.footer-container .details-container ul li {
+    list-style: none;
+    cursor: pointer;
+    margin: 0.3rem 0;
+}
+
+.footer-container .location-container h3 {
+    text-align: center;
+}
+
+.footer-container .contact-container p {
+    margin: 0.3rem 0;
+}
+
+.footer-container .contact-container .icon {
+    margin-right: 0.2rem;
+}
+
+.footer-container .rights-container p {
+    margin: 0.3rem 0;
+}
+
+
+@media(max-width:650px) {
+
+.footer-container .location-container iframe {
+    width: 300px!important;
+}
+
+}
