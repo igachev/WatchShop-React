@@ -25,6 +25,11 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use((response) => {
     store.dispatch(stopSpinnerAction())
     return response
-})
+},
+    (error) => {
+        store.dispatch(stopSpinnerAction())
+        return Promise.reject(error)
+    }
+)
 
 export default axiosInstance
