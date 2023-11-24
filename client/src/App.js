@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import { isAdmin, isAuthenticated } from './store/selectors/authSelectors';
 import { connect, useDispatch } from 'react-redux';
 import { checkAutoLogin } from './services/authService';
+import Footer from './components/Footer/Footer';
 
 
 const Login = lazy(() => import('./pages/Login/Login'))
@@ -96,10 +97,11 @@ let routes =
     
     <div>
     <Suspense fallback={<div>Loading...</div>}>
-         
           {routes}
         </Suspense>
     </div>
+
+    <Footer />
 
     </div>
   );
