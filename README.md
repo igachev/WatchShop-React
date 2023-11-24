@@ -167,3 +167,125 @@ Here are the available routes:
 - `/watches/:watchId` : displays specific watch
 - `/watches/:watchId/edit` : the owner can edit watch details
 - `/watches/search` : Display only watches by the searched brand
+
+
+### Images:
+
+<p align="center">
+ Watch Catalog
+
+ ![01 watchesPage](https://github.com/igachev/WatchShop-React/assets/102420254/4e8f5224-39b6-4a41-8b5b-2a4be75e492e)
+
+</p>
+
+<p align="center">
+ Guest Menu View
+
+ ![02 guestMenu](https://github.com/igachev/WatchShop-React/assets/102420254/5cbc24db-df0c-4553-8eb3-b6e8453b39a8)
+
+</p>
+
+<p align="center">
+ Logged In User Menu View
+
+ ![03 loggedInUserMenu](https://github.com/igachev/WatchShop-React/assets/102420254/17118de7-28d8-4149-9892-17b8ef19b78f)
+
+</p>
+
+<p align="center">
+ Admin User View
+
+ ![04 adminMenu](https://github.com/igachev/WatchShop-React/assets/102420254/e47e8d22-c0ab-4fa1-8c3c-444b24767be6)
+
+</p>
+
+<p align="center">
+ Login Validation
+
+ ![05 loginValidation](https://github.com/igachev/WatchShop-React/assets/102420254/286b155d-dbef-48f1-9dec-9195128ac950)
+
+</p>
+
+<p align="center">
+ Search Page
+
+ ![06 search](https://github.com/igachev/WatchShop-React/assets/102420254/a11f7c95-a7fb-4c58-a6c8-6bf3fa482ec0)
+
+</p>
+
+<p align="center">
+ Guest Watch Details View
+
+ ![07 guestWatchDetails](https://github.com/igachev/WatchShop-React/assets/102420254/2a7c11b7-246c-4dde-af40-7fde0c034c92)
+
+</p>
+
+<p align="center">
+ Logged In User Watch Details View
+
+ ![08 loggedWatchDetails](https://github.com/igachev/WatchShop-React/assets/102420254/d2e7ed6d-aa9c-4983-ac1e-1dc48322eb64)
+
+</p>
+
+<p align="center">
+ Admin User Watch Details View
+
+ ![09 adminWatchDetails](https://github.com/igachev/WatchShop-React/assets/102420254/462cd21f-2852-4ef7-b66b-935097269acc)
+
+</p>
+
+<p align="center">
+ Create Watch Page
+
+ ![10 adminCreate](https://github.com/igachev/WatchShop-React/assets/102420254/666db4d3-c1dd-4940-be35-0839caac90fb)
+
+</p>
+
+<p align="center">
+ Edit Watch Page
+
+ ![11 adminEdit](https://github.com/igachev/WatchShop-React/assets/102420254/339a54bb-fa3a-4dc0-8889-fa9bdc9a2be2)
+
+</p>
+
+<p align="center">
+ Admin View to All Purchases made by users and their details
+
+ ![12 adminPurchases](https://github.com/igachev/WatchShop-React/assets/102420254/03e3d3c8-5568-4215-940a-228335d7e81d)
+
+</p>
+
+<p align="center">
+ User View to his User Purchase History
+
+ ![13 userPurchases](https://github.com/igachev/WatchShop-React/assets/102420254/ebe96b31-7074-442f-a9db-46647d085fcb)
+
+</p>
+
+<p align="center">
+ User Cart View
+
+ ![14 userCart](https://github.com/igachev/WatchShop-React/assets/102420254/1d579a0a-c67e-43ef-a95a-84de4d3a103f)
+
+</p>
+
+<p align="center">
+ Logged in User can evaluate watch from 1-5
+
+ ![15 userRate](https://github.com/igachev/WatchShop-React/assets/102420254/014f73e1-15be-4961-8651-b6b497eabb86)
+
+</p>
+
+<p align="center">
+ Redux State Actions.
+
+ ![16 reduxState](https://github.com/igachev/WatchShop-React/assets/102420254/cccdd6ba-4e80-4dee-8f75-16b2eb4fd5c6)
+
+</p>
+
+<p align="center">
+ Loading Spinner
+
+ ![17 loadingSpinner](https://github.com/igachev/WatchShop-React/assets/102420254/d9250b67-199e-47d5-9e79-f876c06895ea)
+
+</p>
