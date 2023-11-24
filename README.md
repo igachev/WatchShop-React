@@ -107,3 +107,63 @@ The server listens on port 5000 by default. Here are the endpoints:
 - `controllers` : Used for creating the endpoints,handle requests and responses
 - `services` : Handle database model operations
 - `index.js` : Entry point of the application
+
+
+# Front-end documentation:
+
+This is Single Page application built with React,Redux,Axios.
+
+## It has:
+<h3>Web Responsive Design</h3>
+<h3>CSS flexbox layout</h3>
+<h3>Pagination managed by Redux</h3>
+<h3>Loading Spinner managed by Redux and axios http interceptor</h3>
+<h3>Authorization Bearer Token</h3>
+<h3>Form Validations</h3>
+<h3>Displays errors from back-end</h3>
+
+
+### Requirements:
+   - "@fortawesome/fontawesome-svg-core": "^6.4.2",
+   - "@fortawesome/free-brands-svg-icons": "^6.4.2",
+   - "@fortawesome/free-regular-svg-icons": "^6.4.2",
+   - "@fortawesome/free-solid-svg-icons": "^6.4.2",
+   - "@fortawesome/react-fontawesome": "^0.2.0",
+   - "@testing-library/jest-dom": "^5.17.0",
+   - "@testing-library/react": "^13.4.0",
+   - "@testing-library/user-event": "^13.5.0",
+   - "axios": "^1.6.1",
+   - "react": "^18.2.0",
+   - "react-dom": "^18.2.0",
+   - "react-redux": "^8.1.3",
+   - "react-router-dom": "^6.18.0",
+   - "react-scripts": "5.0.1",
+   - "redux": "^4.2.1",
+   - "redux-thunk": "^2.4.2",
+   - "reselect": "^4.1.8",
+   - "web-vitals": "^2.1.4"
+
+
+### Installation:
+6. Make sure you completed the above mentioned backend installation
+7. Go to folder client: `cd client`
+8. Install dependancies: `npm install`
+9. Start the application: `npm start`
+
+
+### Routes:
+
+Here are the available routes:
+
+
+- `/` : homepage which redirects to `/watches`
+- `/users/login` : display login page
+- `/users/register` : display register page
+- `/users/cart` : display user's cart page
+- `/users/purchaseHistory` : display user's purchase history
+- `/users/adminHistory` : display all bought products by users (only the owner of the shop can see this)
+- `/watches` : display the watch catalog
+- `/watches/create` : the owner can add new watch to his catalog
+- `/watches/:watchId` : displays specific watch
+- `/watches/:watchId/edit` : the owner can edit watch details
+- `/watches/search` : Display only watches by the searched brand
