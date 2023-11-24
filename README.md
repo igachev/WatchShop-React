@@ -2,6 +2,24 @@
 React Single Page App. Online store for watches
 
 
+## Link to WatchShop Website: https://watch-shop-react.onrender.com
+
+
+## Link to WatchShop API: https://watch-shop-iwta.onrender.com/watches
+
+
+## Test Accounts:
+`Admin account login details` - email : `adminW@abv.bg` password : `1234`
+
+
+`User account login details` - email : `test@abv.bg` password : `1234`
+
+
+## How it works:
+- `Admin` : The admin is able to add,edit,delete watches,see all purchases made in the website.In the <strong>All Purchases</strong> section he can see customer details which are required in order to send the products to the respective addresses.
+- `logged in user` : The user is able to search watches, evaluate watches from 1-5,add watches to his cart,remove watches from his cart,buy watches,check his own purchase history
+- `guest user` : He can only check watches and their rating,search watches,login,register
+
 <strong>In this file I will provide documentation for back-end and front-end</strong>
 
 
@@ -33,9 +51,6 @@ JWT_SECRET =
 
 ADMIN_EMAIL =   
 
-SUBSCRIPTION_EMAIL = 
-
-SUBSCRIPTION_EMAIL_PASSWORD = 
 
 <strong>Example values of each variable(Keep in mind these are just example values and you must add your own values):</strong>
 
