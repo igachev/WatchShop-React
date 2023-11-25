@@ -123,6 +123,16 @@ This is Single Page application built with React,Redux,Axios.
 <h3>Displays errors from back-end</h3>
 
 
+### Folder structure:
+`components` - it contains reusable React Components
+
+`pages` - it contains React components that represent different pages or views
+
+`services` - it contains the logic related to http requests,http interceptors
+
+`store` - manages the state in React.It contains the following folders: `Actions`,`Reducers`,`Selectors`
+
+
 ### Requirements:
    - "@fortawesome/fontawesome-svg-core": "^6.4.2",
    - "@fortawesome/free-brands-svg-icons": "^6.4.2",
