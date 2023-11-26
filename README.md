@@ -182,6 +182,13 @@ Here are the available routes:
 ### Images:
 
 <p align="center">
+Redux state chart
+
+ ![18 reduxStateChart](https://github.com/igachev/WatchShop-React/assets/102420254/83bcc099-ccb8-4eba-a06b-22442a8bdede)
+
+</p>
+
+<p align="center">
  Watch Catalog
 
  ![01 watchesPage](https://github.com/igachev/WatchShop-React/assets/102420254/4e8f5224-39b6-4a41-8b5b-2a4be75e492e)
