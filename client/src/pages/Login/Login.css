@@ -11,67 +11,7 @@
     animation: login-text-animation 800ms ease;
 }
 
-.login-container {
-    min-height: 600px;
-    background-color: #C0C0C0;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.login-form-container {
-    text-align: right;
-    animation: login-form-animation 1000ms ease-in-out;
-}
-
-.login-form-container label {
-font-size: 1.3rem;
-margin-right: 0.5rem;
-}
-
-.login-form-container input {
-    padding: 0.6rem;
-    border-radius: 12px;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    border-style: solid;
-}
-
-.login-form-container .validation-error {
-    color: #DC143C;
-    text-align: center;
-}
-
-.login-form-container .login-btn {
-    text-align: center;
-    
-}
-
-.login-form-container .login-btn button {
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    border-style: solid;
-    transition: all 0.5s linear;
-}
-
-.login-form-container .login-btn button:hover {
-    background-color: black;
-    color: #C0C0C0;
-}
-
-@keyframes login-form-animation {
-    0% {
-      transform: translateX(-200%);
-    }
-
-    100% {
-      transform: translateX(0);
-    }
-  }
 
   @keyframes login-text-animation {
     0% {
