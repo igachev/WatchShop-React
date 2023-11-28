@@ -5,7 +5,7 @@ import "./Register.css"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { bindActionCreators } from "redux"
-import RegisterForm from "../../components/RegisterForm/RegisterForm"
+import AuthForm from "../../components/AuthForm/AuthForm"
 
 function Register(props) {
 
@@ -14,8 +14,9 @@ function Register(props) {
             {props.isLoading && <LoadingSpinner />}
             <h1>Register Page</h1>
 
-        <RegisterForm
-        onRegister={props.registerAction}
+        <AuthForm 
+        type="register"
+        onSubmit={props.registerAction}
         errorMessage={props.errorMessage}
         />
 

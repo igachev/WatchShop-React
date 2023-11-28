@@ -5,7 +5,7 @@ import "./Login.css"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { bindActionCreators } from "redux"
-import LoginForm from "../../components/LoginForm/LoginForm"
+import AuthForm from "../../components/AuthForm/AuthForm"
 
 function Login(props) {
 
@@ -14,10 +14,11 @@ function Login(props) {
             {props.isLoading && <LoadingSpinner />}
             <h1>Login Page</h1>
 
-            <LoginForm 
-            onLogin={props.loginAction}
+           <AuthForm 
+            type="login"
+            onSubmit={props.loginAction}
             errorMessage={props.errorMessage}
-            />
+           />
 
         </div>
     )
