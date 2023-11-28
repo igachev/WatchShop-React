@@ -1,0 +1,94 @@
+/* create form css */
+.create-container {
+    background-color: #C0C0C0;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 3px 1px black;
+    min-height: 400px;
+    flex-basis: 80%;
+    margin: auto;
+}
+
+.create-container div {
+    text-align: center;
+    padding: 0.3rem 0;
+}
+
+.create-container label {
+    margin-right: 0.5rem;
+}
+
+.create-container input , .create-container select {
+    padding: 0.6rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-style: solid;
+}
+
+.create-container .create-btn button {
+    color: #fff;
+    border-radius: 0.5rem;
+    background-color: green;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    font-size: 1rem;
+}
+
+.create-container .create-btn button:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+.create-container .validation-error {
+    color: #DC143C;
+}
+
+/* -------------------------------------------------- */
+/* Edit form css */
+.edit-container {
+    background-color: #C0C0C0;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 3px 1px black;
+    min-height: 400px;
+    flex-basis: 80%;
+    margin: auto;
+}
+
+.edit-container div {
+    text-align: center;
+    padding: 0.3rem 0;
+}
+
+.edit-container label {
+    margin-right: 0.5rem;
+}
+
+.edit-container input , .edit-container select {
+    padding: 0.6rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-style: solid;
+}
+
+.edit-container .edit-btn button {
+    color: #fff;
+    border-radius: 0.5rem;
+    background-color: green;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    font-size: 1rem;
+}
+
+.edit-container .edit-btn button:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+.edit-container .validation-error {
+    color: #DC143C;
+}

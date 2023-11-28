@@ -1,91 +1,13 @@
-import { useState } from "react"
-import { connect, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+
+import { connect } from "react-redux"
 import { editWatchAction } from "../../store/actions/watchActions"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import "./EditWatch.css"
+import { bindActionCreators } from "redux"
+import CreateEditForm from "../../components/CreateEditForm/CreateEditForm"
 
 function EditWatch(props) {
-
-const [brand,setBrand] = useState(props.watch.brand)
-const [model,setModel] = useState(props.watch.model)
-const [image,setImage] = useState(props.watch.image)
-const [battery,setBattery] = useState(props.watch.battery)
-const [mechanism,setMechanism] = useState(props.watch.mechanism)
-const [price,setPrice] = useState(props.watch.price)
-const [strap,setStrap] = useState(props.watch.strap)
-const [glass,setGlass] = useState(props.watch.glass)
-const [waterResistance,setWaterResistance] = useState(props.watch.waterResistance)
-
-const errorsObj = {brand:'',model:'',image:'',battery:'',mechanism:'',
-price:'',strap:'',glass:'',waterResistance:''};
-const [errors,setErrors] = useState(errorsObj)
-
-const navigation = useNavigate()
-const dispatch = useDispatch()
-
-function onEdit(e) {
-    e.preventDefault()
-
-    let error = false;
-    const errorObj = {...errorsObj};
-
-    if(brand === '') {
-        error = true;
-        errorObj.brand = 'Brand is required'
-    }
-
-    if(model === '') {
-        error = true;
-        errorObj.model = 'Model is required'
-    }
-
-    if(image === '') {
-        error = true;
-        errorObj.image = 'Image is required'
-    }
-
-    if(battery === '') {
-        error = true;
-        errorObj.battery = 'Battery is required'
-    }
-
-    if(mechanism === '') {
-        error = true;
-        errorObj.mechanism = 'Mechanism is required'
-    }
-
-    if(price === '') {
-        error = true;
-        errorObj.price = 'Price is required'
-    }
-
-    if(strap === '') {
-        error = true;
-        errorObj.strap = 'Strap is required'
-    }
-
-    if(glass === '') {
-        error = true;
-        errorObj.glass = 'Glass is required'
-    }
-
-    if(waterResistance === '') {
-        error = true;
-        errorObj.waterResistance = 'Water Resistance is required'
-    }
-
-    setErrors(errorObj);
-
-    if(error) {
-        return;
-    }
-
-    dispatch(editWatchAction(props.watch._id,brand,model,image,battery,mechanism,
-        price,strap,glass,waterResistance,navigation));
-    
-}
 
     return (
         <div className="outer-edit">
@@ -94,105 +16,11 @@ function onEdit(e) {
 
 <div className="outer-edit-container">
 
-<div className="edit-container">
-    <form onSubmit={onEdit}>
-
-<div>
-    <label>Brand:</label>
-    <input type="text"
-    value={brand}
-    onChange={(e) => setBrand(e.target.value)} />
-</div>
-
-{errors.brand && <div className="validation-error">{errors.brand}</div>}
-
-<div>
-    <label>Model:</label>
-    <input type="text"
-    value={model}
-    onChange={(e) => setModel(e.target.value)} />
-</div>
-
-{errors.model && <div className="validation-error">{errors.model}</div>}
-
-<div>
-    <label>Image Link:</label>
-    <input type="text"
-    value={image}
-    onChange={(e) => setImage(e.target.value)} />
-</div>
-
-{errors.image && <div className="validation-error">{errors.image}</div>}
-
-<div>
-    <label>Battery:</label>
-    <input type="text"
-    value={battery}
-    onChange={(e) => setBattery(e.target.value)} />
-</div>
-
-{errors.battery && <div className="validation-error">{errors.battery}</div>}
-
-<div>
-    <label>Mechanism:</label>
-    <select 
-    value={mechanism} 
-    onChange={(e) => setMechanism(e.target.value)}>
-        <option value="" disabled >Select an option</option>
-        <option value="mechanical">mechanical</option>
-        <option value="automatic">automatic</option>
-        <option value="quartz">quartz</option>
-    </select>
-</div>
-
-{errors.mechanism && <div className="validation-error">{errors.mechanism}</div>}
-
-<div>
-    <label>Price:</label>
-    <input 
-    type="number"
-    value={price}
-    onChange={(e) => setPrice(e.target.value)} />
-</div>
-
-{errors.price && <div className="validation-error">{errors.price}</div>}
-
-<div>
-    <label>Strap:</label>
-    <input 
-    type="text"
-    value={strap}
-    onChange={(e) => setStrap(e.target.value)} />
-</div>
-
-{errors.strap && <div className="validation-error">{errors.strap}</div>}
-
-<div>
-    <label>Glass:</label>
-    <input 
-    type="text"
-    value={glass}
-    onChange={(e) => setGlass(e.target.value)} />
-</div>
-
-{errors.glass && <div className="validation-error">{errors.glass}</div>}
-
-<div>
-    <label>Water Resistance:</label>
-    <input 
-    type="text"
-    value={waterResistance}
-    onChange={(e) => setWaterResistance(e.target.value)} />
-</div>
-
-{errors.waterResistance && <div className="validation-error">{errors.waterResistance}</div>}
-
-<div className="edit-btn">
-    <button type="submit">Edit</button>
-</div>
-
-    </form>
-</div>
+        <CreateEditForm
+        type="edit"
+        watch={props.watch}
+        onSubmit={props.editWatchAction}
+        />
 
 </div>
 
@@ -207,4 +35,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(EditWatch)
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({editWatchAction},dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditWatch)

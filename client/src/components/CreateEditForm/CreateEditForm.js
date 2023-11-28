@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "./CreateForm.css"
+import "./CreateEditForm.css"
 
-function CreateForm(props) {
+function CreateEditForm({type,watch,onSubmit}) {
     const [brand,setBrand] = useState('')
     const [model,setModel] = useState('')
     const [image,setImage] = useState('')
@@ -18,8 +18,24 @@ function CreateForm(props) {
     const [errors,setErrors] = useState(errorsObj)
     
     const navigation = useNavigate()
+
+    const isEdit = type === 'edit'
+
+   useEffect(() => {
+    if(isEdit && watch) {
+        setBrand(watch.brand)
+        setModel(watch.model)
+        setImage(watch.image)
+        setBattery(watch.battery)
+        setMechanism(watch.mechanism)
+        setPrice(watch.price)
+        setStrap(watch.strap)
+        setGlass(watch.glass)
+        setWaterResistance(watch.waterResistance)
+    }
+   },[watch,isEdit])
     
-    function onCreate(e) {
+    function handleSubmit(e) {
         e.preventDefault()
     
         let error = false;
@@ -76,14 +92,21 @@ function CreateForm(props) {
             return;
         }
     
-        props.onCreate(brand,model,image,battery,mechanism,
-            price,strap,glass,waterResistance,navigation);
+        if(type === 'create') {
+            onSubmit(brand,model,image,battery,mechanism,
+                price,strap,glass,waterResistance,navigation);
+        }
+
+        else if(type === 'edit') {
+            onSubmit(watch._id,brand,model,image,battery,mechanism,
+                price,strap,glass,waterResistance,navigation);
+        }
         
     }
 
     return (
-        <div className="create-container">
-            <form onSubmit={onCreate}>
+        <div className={`${type}-container`}>
+            <form onSubmit={handleSubmit}>
 
         <div>
             <label>Brand:</label>
@@ -175,8 +198,8 @@ function CreateForm(props) {
 
         {errors.waterResistance && <div className="validation-error">{errors.waterResistance}</div>}
 
-        <div className="create-btn">
-            <button type="submit">Create</button>
+        <div className={`${type}-btn`}>
+            <button type="submit">{isEdit ? 'Edit' : 'Create'}</button>
         </div>
 
             </form>
@@ -185,4 +208,4 @@ function CreateForm(props) {
 
 }
 
-export default CreateForm
+export default CreateEditForm

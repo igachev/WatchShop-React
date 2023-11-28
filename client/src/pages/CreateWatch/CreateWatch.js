@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { createWatchAction } from "../../store/actions/watchActions"
 import "./CreateWatch.css"
 import { bindActionCreators } from "redux"
-import CreateForm from "../../components/CreateForm/CreateForm"
+import CreateEditForm from "../../components/CreateEditForm/CreateEditForm"
 
 function CreateWatch(props) {
 
@@ -12,8 +12,9 @@ function CreateWatch(props) {
         <h1>Add New Product</h1>
         <div className="outer-create-container">
             
-            <CreateForm
-            onCreate={props.createWatchAction}
+            <CreateEditForm 
+            type="create"
+            onSubmit={props.createWatchAction}
             />
 
         </div>
