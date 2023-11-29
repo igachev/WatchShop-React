@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { getWatchesBeforeSearchAction,searchedWatchesAction } from "../../store/actions/watchActions"
-import { Link } from "react-router-dom"
 import { isAuthenticated } from "../../store/selectors/authSelectors"
 import { bindActionCreators } from "redux"
 import "./SearchWatches.css"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import WatchesCard from "../../components/WatchesCard/WatchesCard"
 
 function SearchWatches(props) {
 
@@ -53,14 +53,10 @@ return (
         
 
 ? (props.searchedWatches.map((watch) =>
-<div key={watch._id} className="search-watches-card">
-<div className="search-img-container"><img src={watch.image} alt="watch" /></div>
-<p>Brand: {watch.brand}</p>
-<p>Model: {watch.model}</p>
-<p>Price: € {watch.price}</p>
-<Link to={`/watches/${watch._id}`}>Details</Link>
-{!props.isAuthenticated && <p>You must be logged in to buy</p>}
-</div>))
+           <div key={watch._id}>
+            <WatchesCard type="search" watch={watch} isAuthenticated={props.isAuthenticated} />
+           </div>
+))
 
 : (<p>Not found</p>)}
 

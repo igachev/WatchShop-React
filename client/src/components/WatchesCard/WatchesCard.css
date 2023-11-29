@@ -1,0 +1,81 @@
+/* Watches container CSS */
+
+
+ .watches-img-container {
+    height: 150px;
+}
+
+ .watches-img-container img {
+    border-radius: 0.5rem;
+}
+
+ .watches-card {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: #C0C0C0;
+    min-height: 350px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 1px -1px 3px 3px rgb(198, 200, 218);
+    margin: 0.8rem 0;
+}
+
+ .watches-card a {
+    text-decoration: none;
+    color: #fff;
+    
+    border-radius: 0.5rem;
+    background-color: green;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s linear;
+}
+
+ .watches-card a:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+ .watches-card p {
+    margin: 0.4rem 0.3rem;
+}
+
+/* --------------------------------------- */
+
+/* Search watches container css */
+
+
+ .search-watches-card .search-img-container {
+    height: 150px;
+}
+
+ .search-watches-card .search-img-container img {
+    border-radius: 0.5rem;
+}
+
+ .search-watches-card {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: #C0C0C0;
+    min-height: 350px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 1px -1px 3px 3px rgb(198, 200, 218);
+    margin: 0.8rem 0;
+}
+
+ .search-watches-card a {
+    text-decoration: none;
+    color: #fff;
+    
+    border-radius: 0.5rem;
+    background-color: green;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s linear;
+}
+
+ .search-watches-card a:hover {
+    background-color: rgb(12, 180, 12);
+}
+
+ .search-watches-card p {
+    margin: 0.4rem 0.3rem;
+}
