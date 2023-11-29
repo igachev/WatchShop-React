@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import "./AdminPurchaseHistory.css";
 import { isLoading } from "../../store/selectors/spinnerSelectors";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import TableRowElement from "../../components/TableRowElement/TableRowElement";
 
 function AdminPurchaseHistory(props) {
 
@@ -39,17 +40,8 @@ return (
     <tbody>
     { props.adminHistory.length > 0
         ? (props.adminHistory.map((details) => 
-         <tr key={details._id}>
-            <td>{details._id}</td>
-            <td>{details.watchId.brand}</td>
-            <td>{details.watchId.model}</td>
-            <td>{details.quantity}</td>
-            <td>{details.date.toString().split('T')[0]}</td>
-            <td>{details.totalSum}</td>
-            <td>{details.name}</td>
-            <td>{details.phone}</td>
-            <td>{details.address}</td>
-         </tr>))
+        <TableRowElement type="admin" details={details} key={details._id} />
+        ))
          : (null)
          }
     </tbody>

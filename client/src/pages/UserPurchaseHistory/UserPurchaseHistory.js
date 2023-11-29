@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import "./UserPurchaseHistory.css"
 import { isLoading } from "../../store/selectors/spinnerSelectors"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import TableRowElement from "../../components/TableRowElement/TableRowElement"
 
 function UserPurchaseHistory(props) {
 
@@ -37,14 +38,8 @@ useEffect(() => {
 
         { props.userPurchaseHistory.length > 0
         ? (props.userPurchaseHistory.map((details) => 
-         <tr key={details._id}>
-            <td>{details._id}</td>
-            <td>{details.watchId.brand}</td>
-            <td>{details.watchId.model}</td>
-            <td>{details.quantity}</td>
-            <td>{details.date.toString().split('T')[0]}</td>
-            <td>{details.totalSum}</td>
-         </tr>))
+         <TableRowElement type="user" details={details} key={details._id} />
+        ))
          : (null)
          }
 
