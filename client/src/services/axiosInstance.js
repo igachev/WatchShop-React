@@ -4,8 +4,8 @@ import { startSpinnerAction, stopSpinnerAction } from "../store/actions/spinnerA
 
 
 const axiosInstance = axios.create({
-    baseURL:'http://localhost:5000'
-  // baseURL: 'https://watch-shop-iwta.onrender.com'
+   // baseURL:'http://localhost:5000'
+   baseURL: 'https://watch-shop-iwta.onrender.com'
 })
 
  axiosInstance.interceptors.request.use((config) => {
