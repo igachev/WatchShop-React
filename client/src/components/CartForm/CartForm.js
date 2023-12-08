@@ -53,7 +53,7 @@ function CartForm(props) {
     }
 
 return (
-    <div key={props.watch._id} className="watch-in-cart">
+    <div className="watch-in-cart">
         <div className="cart-image"><img src={props.watch.image} alt="watch" /></div>
         <h4>Brand: {props.watch.brand}</h4>
         <p>Model: {props.watch.model}</p>
