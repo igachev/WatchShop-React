@@ -38,7 +38,7 @@ function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increa
             {isLoading && <LoadingSpinner />}
             <h1>Watches</h1>
 
-           <div className="watches-container">
+           <div className="watches-container" >
 
            {watches.length > 0
 
