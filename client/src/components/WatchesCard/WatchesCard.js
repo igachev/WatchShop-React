@@ -6,7 +6,7 @@ function WatchesCard({type,watch,isAuthenticated}) {
    let isSearch = type === 'search'
 
     return (
-<div className={ isSearch ? 'search-watches-card' : 'watches-card' } >
+<div className={ isSearch ? 'search-watches-card' : 'watches-card' } data-testid="watches-card-component">
             <div className={`${type}-img-container`}><img src={watch.image} alt="watch" /></div>
             <p>Brand: {watch.brand}</p>
             <p>Model: {watch.model}</p>

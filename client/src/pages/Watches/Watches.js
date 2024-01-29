@@ -36,7 +36,7 @@ function Watches({currentPage,itemsPerPage,getAllWatchesAction,totalPages,increa
         <div className="outer-watches-container">
 
             {isLoading && <LoadingSpinner />}
-            <h1>Watches</h1>
+            <h1 data-testid="title">Watches</h1>
 
            <div className="watches-container" >
 
