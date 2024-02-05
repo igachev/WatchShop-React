@@ -14,7 +14,7 @@ import "./StarRating.css"
     props.addRatingToWatchAction(props.watchId,userRating)
   }
   return (
-    <div >
+    <div data-testid="star-rating-component">
         <p>Rate:</p>
       {Array.from({ length: 5 }, (k, i) => (
         <Star
