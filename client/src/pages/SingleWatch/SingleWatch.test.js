@@ -2,17 +2,17 @@
 import { act } from 'react-dom/test-utils'
 import * as watchService from '../../services/watchService'
 import { store } from '../../store/store'
-import { getSingleWatchAction, getWatchRatingAction } from '../../store/actions/watchActions'
-import { render, screen } from '@testing-library/react'
+import * as watchActions from '../../store/actions/watchActions'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, useNavigate } from 'react-router-dom'
 import SingleWatch from './SingleWatch'
 import { confirmedLoginAction } from '../../store/actions/authActions'
 
-
 jest.mock('../../services/watchService', () => ({
     getWatch: jest.fn(),
-    getRate: jest.fn()
+    getRate: jest.fn(),
+    deleteWatch: jest.fn()
 }))
 
 describe("SingleWatch component", () => {
@@ -132,5 +132,82 @@ test("logged-in user should see 'Rate' and 'Add To Cart' buttons", async () => {
     expect(addToCartButton).toBeInTheDocument()
     expect(rateComponent).toBeInTheDocument()
 })
+
+test("admin user should see 'Delete' and 'Edit' buttons", async () => {
+
+    await act(async () => {
+        watchService.getWatch.mockResolvedValue({data: mockWatch});
+        watchService.getRate.mockResolvedValue({data: mockWatchRating});
+        store.dispatch(confirmedLoginAction({_id:'1',email:'adminW@abv.bg',accessToken:'token',isOwner:true}))
+    
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                <SingleWatch />
+                </MemoryRouter>
+            </Provider>
+        )
+    })
+
+    const deleteButton = await screen.findByRole('button',{name:'Delete'})
+    const editButton = await screen.findByRole('link',{name:'Edit'})
+    expect(deleteButton).toBeInTheDocument()
+    expect(editButton).toBeInTheDocument()
+})
+
+test("when admin clicks 'Delete' button confirmation message should appear", async () => {
+
+    await act(async () => {
+        watchService.getWatch.mockResolvedValue({data: mockWatch});
+        watchService.getRate.mockResolvedValue({data: mockWatchRating});
+        store.dispatch(confirmedLoginAction({_id:'1',email:'adminW@abv.bg',accessToken:'token',isOwner:true}))
+    
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                <SingleWatch />
+                </MemoryRouter>
+            </Provider>
+        )
+    })
+    const confirmMock = jest.fn()
+    global.window.confirm = confirmMock
+    const deleteButton = await screen.findByRole('button',{name:'Delete'})
+    fireEvent.click(deleteButton);
+    expect(confirmMock).toHaveBeenCalledWith('Are you sure you want to delete this watch?');
+})
+
+test("after successful delete confirmation it should delete the watch and redirect to homepage", async () => {
+
+    let deleteWatchActionSpy;
+    let confirmSpy;
+  
+    await act(async () => {
+      watchService.getWatch.mockResolvedValue({ data: mockWatch });
+      watchService.getRate.mockResolvedValue({ data: mockWatchRating });
+      store.dispatch(confirmedLoginAction({ _id: '1', email: 'adminW@abv.bg', accessToken: 'token', isOwner: true }));
+      watchService.deleteWatch.mockResolvedValue({ data: '' });
+  
+      deleteWatchActionSpy = jest.spyOn(watchActions, 'deleteWatchAction');
+      confirmSpy = jest.spyOn(window, 'confirm').mockImplementation(() => true);
+  
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <SingleWatch />
+          </MemoryRouter>
+        </Provider>
+      );
+    });
+  
+    await act(async () => {
+      const deleteButton = await screen.findByRole('button', { name: 'Delete' });
+      fireEvent.click(deleteButton);
+    });
+  
+      expect(confirmSpy).toHaveBeenCalledTimes(1);
+      expect(deleteWatchActionSpy).toHaveBeenCalledTimes(1);
+      expect(window.location.pathname).toBe("/");
+  });
 
 })
