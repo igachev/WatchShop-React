@@ -3,16 +3,19 @@ import { act } from 'react-dom/test-utils'
 import * as watchService from '../../services/watchService'
 import { store } from '../../store/store'
 import * as watchActions from '../../store/actions/watchActions'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { MemoryRouter, useNavigate } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import SingleWatch from './SingleWatch'
-import { confirmedLoginAction } from '../../store/actions/authActions'
+import * as authActions from '../../store/actions/authActions'
+import { addWatchToCartAction, confirmedAddWatchToCartAction, confirmedLoginAction,failedAddWatchToCartAction } from '../../store/actions/authActions'
+import userEvent from '@testing-library/user-event'
 
 jest.mock('../../services/watchService', () => ({
     getWatch: jest.fn(),
     getRate: jest.fn(),
-    deleteWatch: jest.fn()
+    deleteWatch: jest.fn(),
+    addWatchToCart: jest.fn()
 }))
 
 describe("SingleWatch component", () => {
@@ -48,6 +51,19 @@ const mockWatch = {
         "__v": 0 
 }
 const mockWatchRating = 2;
+
+
+
+beforeEach(() => {
+    jest.clearAllMocks()
+    
+})
+
+afterEach(() => {
+    // restore the spy created with spyOn
+   // jest.restoreAllMocks();
+    jest.clearAllMocks()
+  });
 
 
 test("user should fetch a watch and display correct watch details", async () => {
@@ -133,6 +149,81 @@ test("logged-in user should see 'Rate' and 'Add To Cart' buttons", async () => {
     expect(rateComponent).toBeInTheDocument()
 })
 
+test("clicking 'Add To Cart' button should call addWatchToCartAction()", async() => {
+
+    let spyAddWatchToCartAction;
+    spyAddWatchToCartAction = jest.spyOn(authActions,"addWatchToCartAction")
+
+    await act(async () => {
+        watchService.getWatch.mockResolvedValue({data: mockWatch});
+        watchService.getRate.mockResolvedValue({data: mockWatchRating});
+        store.dispatch(confirmedLoginAction({_id:'1',email:'ivan@abv.bg',accessToken:'token',isOwner:false}))
+        watchService.addWatchToCart.mockResolvedValue(mockWatch)
+
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                <SingleWatch  />
+                </MemoryRouter>
+            </Provider>
+        )
+    })
+
+    const addToCartButton = await screen.findByRole('button',{name:'Add To Cart'})
+    fireEvent.click(addToCartButton)
+    expect(spyAddWatchToCartAction).toHaveBeenCalledTimes(1)
+})
+
+test("should successfully add the watch to the user's shop cart in redux state", async () => { 
+    
+    await act(async () => {
+        watchService.getWatch.mockResolvedValue({data: mockWatch});
+        watchService.getRate.mockResolvedValue({data: mockWatchRating});
+        store.dispatch(confirmedLoginAction({_id:'1',email:'ivan@abv.bg',accessToken:'token',isOwner:false}));
+        watchService.addWatchToCart.mockResolvedValue(mockWatch);
+        store.dispatch(confirmedAddWatchToCartAction(mockWatch))
+
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                <SingleWatch />
+                </MemoryRouter>
+            </Provider>
+        )
+    })
+  
+    const userShopCart = store.getState().auth.shopCart
+    
+    expect(userShopCart).toContain(mockWatch)
+    //console.log(userShopCart)
+})
+
+test('should display error message if watch is already added in the user shop cart', async () => {
+    
+    const errorMessageText = 'watch has already been added to cart';
+    
+    await act(async () => {
+      watchService.getWatch.mockResolvedValue({ data: mockWatch });
+      watchService.getRate.mockResolvedValue({ data: mockWatchRating });
+      store.dispatch(confirmedLoginAction({ _id: '1', email: 'ivan@abv.bg', accessToken: 'token', isOwner: false }));
+      watchService.addWatchToCart.mockRejectedValue(new Error(errorMessageText));
+      store.dispatch(failedAddWatchToCartAction("watch has already been added to cart"))
+      
+      
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <SingleWatch />
+          </MemoryRouter>
+        </Provider>
+      );
+
+    });
+    
+    const errorMessage = screen.queryByText(/watch has already been added to cart/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
+
 test("admin user should see 'Delete' and 'Edit' buttons", async () => {
 
     await act(async () => {
@@ -190,6 +281,7 @@ test("after successful delete confirmation it should delete the watch and redire
   
       deleteWatchActionSpy = jest.spyOn(watchActions, 'deleteWatchAction');
       confirmSpy = jest.spyOn(window, 'confirm').mockImplementation(() => true);
+   
   
       render(
         <Provider store={store}>
@@ -209,5 +301,8 @@ test("after successful delete confirmation it should delete the watch and redire
       expect(deleteWatchActionSpy).toHaveBeenCalledTimes(1);
       expect(window.location.pathname).toBe("/");
   });
+
+ 
+  
 
 })
