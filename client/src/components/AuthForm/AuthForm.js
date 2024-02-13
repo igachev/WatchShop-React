@@ -60,6 +60,7 @@ function AuthForm({type,onSubmit,errorMessage}) {
                 <label>Email:</label>
                 <input 
                 type="email"
+                data-testid="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
             </div>
@@ -70,6 +71,7 @@ function AuthForm({type,onSubmit,errorMessage}) {
                 <label>Password:</label>
                 <input 
                 type="password"
+                data-testid="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} />
             </div>
