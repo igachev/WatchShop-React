@@ -54,7 +54,7 @@ function AuthForm({type,onSubmit,errorMessage}) {
         <div className={`${type}-container`}>
             
         <div className={`${type}-form-container`}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-testid="auth-form-submit">
 
             <div>
                 <label>Email:</label>
