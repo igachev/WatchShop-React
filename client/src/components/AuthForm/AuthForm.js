@@ -83,6 +83,7 @@ function AuthForm({type,onSubmit,errorMessage}) {
                 <label >Repeat Password</label>
                 <input 
                 type="password"
+                data-testid="repeat-password"
                 value={repeatPassword}
                 onChange={(e) => setRepeatPassword(e.target.value)} />
     
