@@ -5,9 +5,16 @@ import { MemoryRouter } from "react-router-dom"
 import Register from './Register'
 import * as authService from "../../services/authService"
 import * as authActions from "../../store/actions/authActions"
+import { failedRegisterAction } from "../../store/actions/authActions"
 import { act } from "react-dom/test-utils"
+import AuthForm from "../../components/AuthForm/AuthForm"
 
 describe("Register Component", () => {
+
+    beforeEach(() => {
+        // Clear any setup or reset conditions here
+        jest.clearAllMocks(); // This can be used to clear all mocks if needed
+      });
 
 test("should have only 1 button with name 'Register'", async () => {
 
@@ -60,6 +67,56 @@ test("should have the following texts: 'Email:', 'Password:', 'Repeat Password'"
     expect(repeatPasswordLabelText).toBeInTheDocument()
 })
 
+test("should display error message if password and repeat password are mismatching", async () => {
+    let message = "passwords missmatch!"
+    let registerActionSpy;
+    let registerSpy;
+    
+        await act(async() => {
+           registerActionSpy = jest.spyOn(authActions,'registerAction')
+          registerSpy = jest.spyOn(authService, 'register').mockRejectedValue({ response: { data: { message: 'passwords mismatch!' } } });
+           store.dispatch(failedRegisterAction(message))
+    
+            render(
+                <Provider store={store}>
+                <MemoryRouter>
+                    <Register />
+                </MemoryRouter>
+                </Provider>
+            )
+
+            
+
+        })
+    
+        await act(async() => {
+            const emailInput = await screen.findByTestId('email')
+            const passwordInput = await screen.findByTestId('password')
+            const repeatPasswordInput = await screen.findByTestId('repeat-password')
+        
+            fireEvent.change(emailInput,{target: {value:'stoqn@abv.bg'}})
+            fireEvent.change(passwordInput,{target: {value: '1234'}})
+            fireEvent.change(repeatPasswordInput,{target: {value: '12'}})
+    
+        const registerButton = screen.getByRole('button',{name:'Register'})
+        fireEvent.click(registerButton)
+
+        const passwordMissmatchText = screen.queryByText("passwords missmatch!")
+        expect(passwordMissmatchText).toBeInTheDocument()
+        
+        })
+    
+        expect(registerActionSpy).toHaveBeenCalledTimes(1)
+        expect(registerSpy).toHaveBeenCalledTimes(1)
+        expect(registerSpy).toHaveBeenCalledWith('stoqn@abv.bg','1234','12')
+       
+        // Cleanup spies
+    
+        registerSpy.mockRestore();
+    registerActionSpy.mockRestore();
+    
+    })
+
 test("should display validation errors if click 'Register' button with empty input fields", async () => {
 
     render(
@@ -82,6 +139,9 @@ test("should display validation errors if click 'Register' button with empty inp
     expect(repeatPasswordValidationText).toBeInTheDocument()
 })
 
+
+
+
 test("should call authService.register() and authActions.registerAction() on successful registration", async () => {
     let registerSpy;
     let registerActionSpy;
@@ -89,6 +149,7 @@ test("should call authService.register() and authActions.registerAction() on suc
     await act(async () => {
         registerSpy = jest.spyOn(authService,'register')
         registerActionSpy = jest.spyOn(authActions,'registerAction')
+      
 
     render(
         <Provider store={store}>
@@ -99,7 +160,8 @@ test("should call authService.register() and authActions.registerAction() on suc
     )
     })
 
-    const emailInput = await screen.findByTestId('email')
+    await act(async() => {
+        const emailInput = await screen.findByTestId('email')
     const passwordInput = await screen.findByTestId('password')
     const repeatPasswordInput = await screen.findByTestId('repeat-password')
 
@@ -107,13 +169,21 @@ test("should call authService.register() and authActions.registerAction() on suc
     fireEvent.change(passwordInput,{target: {value: '1234'}})
     fireEvent.change(repeatPasswordInput,{target: {value: '1234'}})
 
+    
+    })
+
     const registerButton = screen.getByRole('button',{name:'Register'})
     fireEvent.click(registerButton)
 
     expect(registerSpy).toHaveBeenCalledTimes(1)
     expect(registerSpy).toHaveBeenCalledWith('stoqn@abv.bg','1234','1234')
     expect(registerActionSpy).toHaveBeenCalledTimes(1)
-
+    // Cleanup spies
+    
+    registerSpy.mockRestore();
+    registerActionSpy.mockRestore();
+    
 })
+
 
 })
