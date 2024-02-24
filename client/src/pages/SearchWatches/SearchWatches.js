@@ -53,7 +53,7 @@ return (
         
 
 ? (props.searchedWatches.map((watch) =>
-           <div key={watch._id}>
+           <div key={watch._id} data-testid="search-watch-card">
             <WatchesCard type="search" watch={watch} isAuthenticated={props.isAuthenticated} />
            </div>
 ))
