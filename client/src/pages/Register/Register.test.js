@@ -117,6 +117,53 @@ test("should display error message if password and repeat password are mismatchi
     
     })
 
+test("should display error message if user already exists",async () => {
+
+    let message = "User already exists!"
+    let registerActionSpy;
+    let registerSpy;
+
+    await act(async() => {
+        registerActionSpy = jest.spyOn(authActions,'registerAction')
+        registerSpy = jest.spyOn(authService,'register').mockRejectedValue({response:{data:message}})
+
+        store.dispatch(failedRegisterAction(message))
+    
+        render(
+            <Provider store={store}>
+            <MemoryRouter>
+                <Register />
+            </MemoryRouter>
+            </Provider>
+        )
+    })
+
+    await act(async() => {
+        const emailInput = await screen.findByTestId('email')
+        const passwordInput = await screen.findByTestId('password')
+        const repeatPasswordInput = await screen.findByTestId('repeat-password')
+    
+        fireEvent.change(emailInput,{target: {value:'stoqn@abv.bg'}})
+        fireEvent.change(passwordInput,{target: {value: '1234'}})
+        fireEvent.change(repeatPasswordInput,{target: {value: '1234'}})
+
+        const registerButton = screen.getByRole('button',{name:'Register'})
+        fireEvent.click(registerButton)
+
+        const passwordMissmatchText = screen.queryByText(message)
+        expect(passwordMissmatchText).toBeInTheDocument()
+    })
+
+    expect(registerActionSpy).toHaveBeenCalledTimes(1)
+        expect(registerSpy).toHaveBeenCalledTimes(1)
+        expect(registerSpy).toHaveBeenCalledWith('stoqn@abv.bg','1234','1234')
+
+    // Cleanup spies
+    registerSpy.mockRestore();
+    registerActionSpy.mockRestore();
+
+})
+
 test("should display validation errors if click 'Register' button with empty input fields", async () => {
 
     render(
