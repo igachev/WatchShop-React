@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { Provider } from "react-redux"
 import { store } from "../../store/store"
 import { MemoryRouter } from "react-router-dom"
@@ -193,6 +193,39 @@ describe("Search component", () => {
       },
       ]
 
+test("should have only 1 input field and 1 label with text 'Brand Name:'",async () => {
+
+    let getAllWatchesBeforeSearchSpy;
+    let getWatchesBeforeSearchActionSpy;
+
+    await act(async() => {
+    
+        getAllWatchesBeforeSearchSpy = jest.spyOn(watchService,'getAllWatchesBeforeSearch').mockResolvedValue({data: mockWatches})
+        getWatchesBeforeSearchActionSpy = jest.spyOn(watchActions,'getWatchesBeforeSearchAction')
+    
+        render(
+            <Provider store={store}>
+            <MemoryRouter>
+            <SearchWatches />
+            </MemoryRouter>
+            </Provider>
+        )
+    
+       })
+
+       const brandNameLabelText = await screen.findByText("Brand Name:")
+       const searchInputField = screen.getByRole('textbox')
+       const allInputFields = screen.getAllByRole('textbox')
+
+       expect(brandNameLabelText).toBeInTheDocument()
+       expect(searchInputField).toBeInTheDocument()
+       expect(allInputFields.length).toBe(1)
+
+       getAllWatchesBeforeSearchSpy.mockRestore()
+   getWatchesBeforeSearchActionSpy.mockRestore()
+
+})
+
 test("should have button with name 'Search'", async () => {
 
     let getAllWatchesBeforeSearchSpy;
@@ -253,6 +286,108 @@ let getWatchesBeforeSearchActionSpy;
 
    getAllWatchesBeforeSearchSpy.mockRestore()
    getWatchesBeforeSearchActionSpy.mockRestore()
+})
+
+test("clicking 'Search' button with input value of 'Casio' should call searchByBrand() and searchedWatchesAction()" , async() => {
+
+    let getAllWatchesBeforeSearchSpy;
+    let getWatchesBeforeSearchActionSpy;
+    let searchByBrandSpy;
+    let searchedWatchesActionSpy;
+
+   await act(async() => {
+
+    getAllWatchesBeforeSearchSpy = jest.spyOn(watchService,'getAllWatchesBeforeSearch').mockResolvedValue({data: mockWatches})
+    getWatchesBeforeSearchActionSpy = jest.spyOn(watchActions,'getWatchesBeforeSearchAction')
+    searchByBrandSpy = jest.spyOn(watchService,'searchByBrand')
+    searchedWatchesActionSpy = jest.spyOn(watchActions,'searchedWatchesAction')
+
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+        <SearchWatches />
+        </MemoryRouter>
+        </Provider>
+    )
+
+   })
+
+
+   await act(async() => {
+   let searchInputField = screen.getByRole('textbox')
+   fireEvent.change(searchInputField,{target: {value:'Casio'}})
+  
+  
+   })
+   
+   const searchBtn = screen.getByRole('button',{name:'Search'})
+   fireEvent.click(searchBtn)
+   
+   await waitFor(() => {
+    expect(searchedWatchesActionSpy).toHaveBeenCalledTimes(1)
+   expect(searchedWatchesActionSpy).toHaveBeenCalledWith('Casio')
+
+   expect(searchByBrandSpy).toHaveBeenCalledTimes(1)
+   expect(searchByBrandSpy).toHaveBeenCalledWith('Casio')
+   
+   })
+
+   getAllWatchesBeforeSearchSpy.mockRestore()
+   getWatchesBeforeSearchActionSpy.mockRestore()
+   searchByBrandSpy.mockRestore()
+   searchedWatchesActionSpy.mockRestore()
+  // const brandOmega2 = await screen.findByText('Brand: Omega2')
+  // expect(brandOmega2).not.toBeInTheDocument()
+})
+
+test("clicking the search button with input value of non existing watch brand should display the text 'not found'" , async() => {
+
+    let getAllWatchesBeforeSearchSpy;
+    let getWatchesBeforeSearchActionSpy;
+    let searchByBrandSpy;
+    let searchedWatchesActionSpy;
+
+   await act(async() => {
+
+    getAllWatchesBeforeSearchSpy = jest.spyOn(watchService,'getAllWatchesBeforeSearch').mockResolvedValue({data: mockWatches})
+    getWatchesBeforeSearchActionSpy = jest.spyOn(watchActions,'getWatchesBeforeSearchAction')
+    searchByBrandSpy = jest.spyOn(watchService,'searchByBrand').mockResolvedValue({data: []})
+    searchedWatchesActionSpy = jest.spyOn(watchActions,'searchedWatchesAction')
+
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+        <SearchWatches />
+        </MemoryRouter>
+        </Provider>
+    )
+
+   })
+
+   await act(async() => {
+   let searchInputField = screen.getByRole('textbox')
+   fireEvent.change(searchInputField,{target: {value:'non existing'}})
+   })
+   
+   const searchBtn = screen.getByRole('button',{name:'Search'})
+   fireEvent.click(searchBtn)
+   
+   await waitFor(() => {
+    expect(searchedWatchesActionSpy).toHaveBeenCalledTimes(1)
+   expect(searchedWatchesActionSpy).toHaveBeenCalledWith('non existing')
+
+   expect(searchByBrandSpy).toHaveBeenCalledTimes(1)
+   expect(searchByBrandSpy).toHaveBeenCalledWith('non existing')
+   
+   })
+  
+   const notFoundText = await screen.findByText('Not found')
+   expect(notFoundText).toBeInTheDocument()
+
+   getAllWatchesBeforeSearchSpy.mockRestore()
+   getWatchesBeforeSearchActionSpy.mockRestore()
+   searchByBrandSpy.mockRestore()
+   searchedWatchesActionSpy.mockRestore()
 })
 
 })
