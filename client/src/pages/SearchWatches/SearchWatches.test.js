@@ -303,13 +303,14 @@ test("clicking the search button with input value of 'Casio' should display only
     let searchByBrandSpy;
     let searchedWatchesActionSpy;
     let searchValue = 'Casio';
-    let filterCasio = mockWatches.filter((watch) => watch.brand === searchValue)
 
    await act(async() => {
 
     getAllWatchesBeforeSearchSpy = jest.spyOn(watchService,'getAllWatchesBeforeSearch').mockResolvedValue({data: mockWatches})
     getWatchesBeforeSearchActionSpy = jest.spyOn(watchActions,'getWatchesBeforeSearchAction')
-    searchByBrandSpy = jest.spyOn(watchService,'searchByBrand').mockResolvedValue({data:filterCasio})
+    searchByBrandSpy = jest.spyOn(watchService, 'searchByBrand').mockResolvedValue({
+        data: mockWatches.filter((watch) => watch.brand === searchValue),
+      });
     searchedWatchesActionSpy = jest.spyOn(watchActions,'searchedWatchesAction')
 
     render(
@@ -343,7 +344,7 @@ test("clicking the search button with input value of 'Casio' should display only
 
   expect(casioBrand).toBeInTheDocument()
   expect(omegaBrand).not.toBeInTheDocument()
-  
+
    getAllWatchesBeforeSearchSpy.mockRestore()
    getWatchesBeforeSearchActionSpy.mockRestore()
    searchByBrandSpy.mockRestore()
