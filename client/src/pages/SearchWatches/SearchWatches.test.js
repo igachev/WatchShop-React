@@ -193,6 +193,14 @@ describe("Search component", () => {
       },
       ]
 
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
 test("should have only 1 input field and 1 label with text 'Brand Name:'",async () => {
 
     let getAllWatchesBeforeSearchSpy;
@@ -288,6 +296,60 @@ let getWatchesBeforeSearchActionSpy;
    getWatchesBeforeSearchActionSpy.mockRestore()
 })
 
+test("clicking the search button with input value of 'Casio' should display only Casio watches" , async() => {
+
+    let getAllWatchesBeforeSearchSpy;
+    let getWatchesBeforeSearchActionSpy;
+    let searchByBrandSpy;
+    let searchedWatchesActionSpy;
+    let searchValue = 'Casio';
+    let filterCasio = mockWatches.filter((watch) => watch.brand === searchValue)
+
+   await act(async() => {
+
+    getAllWatchesBeforeSearchSpy = jest.spyOn(watchService,'getAllWatchesBeforeSearch').mockResolvedValue({data: mockWatches})
+    getWatchesBeforeSearchActionSpy = jest.spyOn(watchActions,'getWatchesBeforeSearchAction')
+    searchByBrandSpy = jest.spyOn(watchService,'searchByBrand').mockResolvedValue({data:filterCasio})
+    searchedWatchesActionSpy = jest.spyOn(watchActions,'searchedWatchesAction')
+
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+        <SearchWatches />
+        </MemoryRouter>
+        </Provider>
+    )
+
+   })
+
+   await act(async() => {
+   let searchInputField = screen.getByRole('textbox')
+   fireEvent.change(searchInputField,{target: {value:searchValue}})
+   })
+   
+   const searchBtn = screen.getByRole('button',{name:'Search'})
+   fireEvent.click(searchBtn)
+   
+   await waitFor(() => {
+    expect(searchedWatchesActionSpy).toHaveBeenCalledTimes(1)
+   expect(searchedWatchesActionSpy).toHaveBeenCalledWith(searchValue)
+
+   expect(searchByBrandSpy).toHaveBeenCalledTimes(1)
+   expect(searchByBrandSpy).toHaveBeenCalledWith(searchValue)
+   
+   })
+  const casioBrand = await screen.findByText('Brand: Casio')
+  const omegaBrand = screen.queryByText('Brand: Omega')
+
+  expect(casioBrand).toBeInTheDocument()
+  expect(omegaBrand).not.toBeInTheDocument()
+  
+   getAllWatchesBeforeSearchSpy.mockRestore()
+   getWatchesBeforeSearchActionSpy.mockRestore()
+   searchByBrandSpy.mockRestore()
+   searchedWatchesActionSpy.mockRestore()
+})
+
 test("clicking 'Search' button with input value of 'Casio' should call searchByBrand() and searchedWatchesAction()" , async() => {
 
     let getAllWatchesBeforeSearchSpy;
@@ -340,12 +402,14 @@ test("clicking 'Search' button with input value of 'Casio' should call searchByB
   // expect(brandOmega2).not.toBeInTheDocument()
 })
 
+
 test("clicking the search button with input value of non existing watch brand should display the text 'not found'" , async() => {
 
     let getAllWatchesBeforeSearchSpy;
     let getWatchesBeforeSearchActionSpy;
     let searchByBrandSpy;
     let searchedWatchesActionSpy;
+    let searchValue = 'non existing';
 
    await act(async() => {
 
@@ -366,7 +430,7 @@ test("clicking the search button with input value of non existing watch brand sh
 
    await act(async() => {
    let searchInputField = screen.getByRole('textbox')
-   fireEvent.change(searchInputField,{target: {value:'non existing'}})
+   fireEvent.change(searchInputField,{target: {value:searchValue}})
    })
    
    const searchBtn = screen.getByRole('button',{name:'Search'})
@@ -374,20 +438,25 @@ test("clicking the search button with input value of non existing watch brand sh
    
    await waitFor(() => {
     expect(searchedWatchesActionSpy).toHaveBeenCalledTimes(1)
-   expect(searchedWatchesActionSpy).toHaveBeenCalledWith('non existing')
+   expect(searchedWatchesActionSpy).toHaveBeenCalledWith(searchValue)
 
    expect(searchByBrandSpy).toHaveBeenCalledTimes(1)
-   expect(searchByBrandSpy).toHaveBeenCalledWith('non existing')
+   expect(searchByBrandSpy).toHaveBeenCalledWith(searchValue)
    
    })
   
    const notFoundText = await screen.findByText('Not found')
    expect(notFoundText).toBeInTheDocument()
 
-   getAllWatchesBeforeSearchSpy.mockRestore()
-   getWatchesBeforeSearchActionSpy.mockRestore()
-   searchByBrandSpy.mockRestore()
-   searchedWatchesActionSpy.mockRestore()
+   
+    getAllWatchesBeforeSearchSpy.mockRestore();
+    getWatchesBeforeSearchActionSpy.mockRestore();
+    searchByBrandSpy.mockRestore();
+    searchedWatchesActionSpy.mockRestore();
+  
 })
+
+
+
 
 })
