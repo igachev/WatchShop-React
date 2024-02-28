@@ -1,8 +1,9 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { Provider } from "react-redux"
 import { store } from "../../store/store"
 import { MemoryRouter } from "react-router-dom"
 import { Header } from "./Header"
+import * as authActions from '../../store/actions/authActions'
 
 
 describe("Header component", () => {
@@ -89,6 +90,28 @@ test("admin user should see following routes: Watches,Search,Create Product,All 
         expect(createProductLink).toBeInTheDocument()
         expect(allPurchasesLink).toBeInTheDocument()
         expect(logoutButton).toBeInTheDocument()
+    })
+
+    test("clicking 'Logout' button should call logoutAction()",async () => {
+
+        const propsMock = {
+            isAuthenticated: true,
+            isOwner: true
+        }
+
+        let logoutActionSpy = jest.spyOn(authActions,'logoutAction');
+        
+            render(
+                <Provider store={store}>
+                    <MemoryRouter>
+                    <Header {...propsMock} />
+                    </MemoryRouter>
+                </Provider>
+            )
+
+            const logoutButton = screen.getByRole('button',{name: 'Logout'})
+            fireEvent.click(logoutButton)
+            expect(logoutActionSpy).toHaveBeenCalledTimes(1)
     })
 
 })
