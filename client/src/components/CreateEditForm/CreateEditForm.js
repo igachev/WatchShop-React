@@ -112,7 +112,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <label>Brand:</label>
             <input type="text"
             value={brand}
-            onChange={(e) => setBrand(e.target.value)} />
+            onChange={(e) => setBrand(e.target.value)}
+            data-testid="brand-input"
+            />
         </div>
 
         {errors.brand && <div className="validation-error">{errors.brand}</div>}
@@ -121,7 +123,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <label>Model:</label>
             <input type="text"
             value={model}
-            onChange={(e) => setModel(e.target.value)} />
+            onChange={(e) => setModel(e.target.value)}
+            data-testid="model-input"
+            />
         </div>
 
         {errors.model && <div className="validation-error">{errors.model}</div>}
@@ -130,7 +134,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <label>Image Link:</label>
             <input type="text"
             value={image}
-            onChange={(e) => setImage(e.target.value)} />
+            onChange={(e) => setImage(e.target.value)} 
+            data-testid="image-input"
+            />
         </div>
 
         {errors.image && <div className="validation-error">{errors.image}</div>}
@@ -139,7 +145,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <label>Battery:</label>
             <input type="text"
             value={battery}
-            onChange={(e) => setBattery(e.target.value)} />
+            onChange={(e) => setBattery(e.target.value)} 
+            data-testid="battery-input"
+            />
         </div>
 
         {errors.battery && <div className="validation-error">{errors.battery}</div>}
@@ -148,7 +156,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <label>Mechanism:</label>
             <select 
             value={mechanism} 
-            onChange={(e) => setMechanism(e.target.value)}>
+            onChange={(e) => setMechanism(e.target.value)}
+            data-testid="mechanism-input"
+            >
                 <option value="" disabled >Select an option</option>
                 <option value="mechanical">mechanical</option>
                 <option value="automatic">automatic</option>
@@ -163,7 +173,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <input 
             type="number"
             value={price}
-            onChange={(e) => setPrice(e.target.value)} />
+            onChange={(e) => setPrice(e.target.value)} 
+            data-testid="price-input"
+            />
         </div>
 
         {errors.price && <div className="validation-error">{errors.price}</div>}
@@ -173,7 +185,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <input 
             type="text"
             value={strap}
-            onChange={(e) => setStrap(e.target.value)} />
+            onChange={(e) => setStrap(e.target.value)} 
+            data-testid="strap-input"
+            />
         </div>
 
         {errors.strap && <div className="validation-error">{errors.strap}</div>}
@@ -183,7 +197,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <input 
             type="text"
             value={glass}
-            onChange={(e) => setGlass(e.target.value)} />
+            onChange={(e) => setGlass(e.target.value)}
+            data-testid="glass-input"
+            />
         </div>
 
         {errors.glass && <div className="validation-error">{errors.glass}</div>}
@@ -193,7 +209,9 @@ function CreateEditForm({type,watch,onSubmit}) {
             <input 
             type="text"
             value={waterResistance}
-            onChange={(e) => setWaterResistance(e.target.value)} />
+            onChange={(e) => setWaterResistance(e.target.value)} 
+            data-testid="water-resistance-input"
+            />
         </div>
 
         {errors.waterResistance && <div className="validation-error">{errors.waterResistance}</div>}
