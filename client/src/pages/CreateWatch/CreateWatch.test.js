@@ -147,4 +147,18 @@ test("should call createWatchAction() when 'Create' button is clicked and all in
     createWatchSpy.mockRestore()
 })
 
+test("should contain and use the component 'CreateEditForm'",async() => {
+
+    render(
+        <Provider store={store}>
+            <MemoryRouter>
+                <CreateWatch />
+            </MemoryRouter>
+        </Provider>
+    )
+
+    const createEditFormComponent = screen.getByTestId('create-edit-form')
+    expect(createEditFormComponent).toBeInTheDocument()
+})
+
 })

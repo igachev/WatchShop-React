@@ -105,7 +105,7 @@ function CreateEditForm({type,watch,onSubmit}) {
     }
 
     return (
-        <div className={`${type}-container`}>
+        <div className={`${type}-container`} data-testid="create-edit-form">
             <form onSubmit={handleSubmit}>
 
         <div>
