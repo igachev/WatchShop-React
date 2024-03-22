@@ -81,4 +81,53 @@ test("should call getAdminPurchaseHistoryAction() on component mounting", async(
     getAdminPurchaseHistoryActionSpy.mockRestore()
 })
 
+test("the number of displayed table rows should be equal to the number of purchases in mockAdminHistory array", async() => {
+
+    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+  
+       render(
+           <Provider store={store}>
+           <MemoryRouter>
+               <AdminPurchaseHistory />
+           </MemoryRouter>
+           </Provider>
+       )
+
+    const tableBody = await screen.findByTestId("table-body")
+    expect(tableBody.children.length).toBe(mockAdminHistory.length)
+})
+
+test("first purchase should be displayed with correct details", async() => {
+
+        adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+   
+        render(
+            <Provider store={store}>
+            <MemoryRouter>
+                <AdminPurchaseHistory />
+            </MemoryRouter>
+            </Provider>
+        )
+       
+    const firstOrderNumber = await screen.findByText(mockAdminHistory[0]._id)
+    const firstOrderBrand = await screen.findByText(mockAdminHistory[0].watchId.brand)
+    const firstOrderModel = await screen.findByText(mockAdminHistory[0].watchId.model)
+    const firstOrderQuantity = await screen.findByText(mockAdminHistory[0].quantity)
+    const firstOrderDate = await screen.findByText(mockAdminHistory[0].date.toString().split('T')[0])
+    const firstOrderSum = await screen.findByText(mockAdminHistory[0].totalSum)
+    const firstOrderName = await screen.findByText(mockAdminHistory[0].name)
+    const firstOrderAddress = await screen.findAllByText(mockAdminHistory[0].address)
+    const firstOrderPhone = await screen.findByText(mockAdminHistory[0].phone)
+
+    expect(firstOrderNumber).toBeInTheDocument()
+    expect(firstOrderBrand).toBeInTheDocument()
+    expect(firstOrderModel).toBeInTheDocument()
+    expect(firstOrderQuantity).toBeInTheDocument()
+    expect(firstOrderDate).toBeInTheDocument()
+    expect(firstOrderSum).toBeInTheDocument()
+    expect(firstOrderName).toBeInTheDocument()
+    expect(firstOrderAddress[0]).toBeInTheDocument()
+    expect(firstOrderPhone).toBeInTheDocument()
+})
+
 })

@@ -37,7 +37,7 @@ return (
         </tr>
     </thead>
 
-    <tbody>
+    <tbody data-testid="table-body">
     { props.adminHistory.length > 0
         ? (props.adminHistory.map((details) => 
         <TableRowElement type="admin" details={details} key={details._id} />
