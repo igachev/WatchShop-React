@@ -58,6 +58,7 @@ describe("AdminPurchaseHistory component", () => {
 test("should have title 'All purchases made by users'", async() => {
 
     adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+    
     render(
         <Provider store={store}>
         <MemoryRouter>
@@ -65,6 +66,7 @@ test("should have title 'All purchases made by users'", async() => {
         </MemoryRouter>
         </Provider>
     )
+ 
 
     const h1Element = screen.getByRole('heading',{level: 1, name: 'All purchases made by users'})
     expect(h1Element).toBeInTheDocument()
@@ -73,15 +75,17 @@ test("should have title 'All purchases made by users'", async() => {
 test("should call getAdminPurchaseHistoryAction() on component mounting", async() => {
 
   let getAdminPurchaseHistoryActionSpy = jest.spyOn(authActions,'getAdminPurchaseHistoryAction')
-  adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
   
-       render(
-           <Provider store={store}>
-           <MemoryRouter>
-               <AdminPurchaseHistory />
-           </MemoryRouter>
-           </Provider>
-       )
+    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+    
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+            <AdminPurchaseHistory />
+        </MemoryRouter>
+        </Provider>
+    )
+  
 
     expect(getAdminPurchaseHistoryActionSpy).toHaveBeenCalledTimes(1)
     expect(adminPurchaseHistory).toHaveBeenCalledTimes(1)
@@ -91,15 +95,16 @@ test("should call getAdminPurchaseHistoryAction() on component mounting", async(
 
 test("the number of displayed table rows should be equal to the number of purchases in mockAdminHistory array", async() => {
 
-    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
-  
-       render(
-           <Provider store={store}>
-           <MemoryRouter>
-               <AdminPurchaseHistory />
-           </MemoryRouter>
-           </Provider>
-       )
+        adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+        
+        render(
+            <Provider store={store}>
+            <MemoryRouter>
+                <AdminPurchaseHistory />
+            </MemoryRouter>
+            </Provider>
+        )
+     
 
     const tableBody = await screen.findByTestId("table-body")
     expect(tableBody.children.length).toBe(mockAdminHistory.length)
@@ -108,7 +113,7 @@ test("the number of displayed table rows should be equal to the number of purcha
 test("first purchase should be displayed with correct details", async() => {
 
         adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
-   
+        
         render(
             <Provider store={store}>
             <MemoryRouter>
@@ -116,6 +121,7 @@ test("first purchase should be displayed with correct details", async() => {
             </MemoryRouter>
             </Provider>
         )
+   
        
     const firstOrderNumber = await screen.findByText(mockAdminHistory[0]._id)
     const firstOrderBrand = await screen.findByText(mockAdminHistory[0].watchId.brand)
@@ -140,25 +146,26 @@ test("first purchase should be displayed with correct details", async() => {
 
 test("should have and use 'TableRowElement' component if there are purchases", async() => {
 
-    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
-   
-    render(
-        <Provider store={store}>
-        <MemoryRouter>
-            <AdminPurchaseHistory />
-        </MemoryRouter>
-        </Provider>
-    )
+        adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+        
+        render(
+            <Provider store={store}>
+            <MemoryRouter>
+                <AdminPurchaseHistory />
+            </MemoryRouter>
+            </Provider>
+        )
+     
 
     const tableRowElementComponents = await screen.findAllByTestId('table-row')
     expect(tableRowElementComponents.length).toBeGreaterThan(0)
     expect(tableRowElementComponents.length).toBe(mockAdminHistory.length)
 
-    adminPurchaseHistory.mockRestore()
 })
 
 test("should not have 'TableRowElement' component if there are no purchases made", async() => {
 
+   
     adminPurchaseHistory.mockResolvedValue({data:[]})
     store.dispatch(confirmedGetAdminPurchaseHistoryAction([]))
    
@@ -169,9 +176,63 @@ test("should not have 'TableRowElement' component if there are no purchases made
         </MemoryRouter>
         </Provider>
     )
+  
 
     const tableRowElementComponents = screen.queryAllByTestId('table-row')
     expect(tableRowElementComponents.length).toBe(0)
+})
+
+test("the table should have 9 table header elements", async() => {
+
+    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+        
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+            <AdminPurchaseHistory />
+        </MemoryRouter>
+        </Provider>
+    )
+
+    const tableHeadersRow = await screen.findByTestId('table-headers-row');
+    const allTableHeaders = tableHeadersRow.children.length
+    console.log(tableHeadersRow.children[0].textContent)
+    expect(allTableHeaders).toBe(9)
+})
+
+test("table header elements should have correct text values", async() => {
+
+    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+        
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+            <AdminPurchaseHistory />
+        </MemoryRouter>
+        </Provider>
+    )
+
+    const tableHeadersRow = await screen.findByTestId('table-headers-row');
+
+    const orderNumber = tableHeadersRow.children[0].textContent;
+    const brand = tableHeadersRow.children[1].textContent;
+    const model = tableHeadersRow.children[2].textContent;
+    const quantity = tableHeadersRow.children[3].textContent;
+    const date = tableHeadersRow.children[4].textContent;
+    const totalSum = tableHeadersRow.children[5].textContent;
+    const name = tableHeadersRow.children[6].textContent;
+    const phone = tableHeadersRow.children[7].textContent;
+    const address = tableHeadersRow.children[8].textContent;
+
+    expect(orderNumber).toBe("order №")
+    expect(brand).toBe("Brand")
+    expect(model).toBe("Model")
+    expect(quantity).toBe("quantity")
+    expect(date).toBe("date")
+    expect(totalSum).toBe("totalSum")
+    expect(name).toBe("Name")
+    expect(phone).toBe("Phone")
+    expect(address).toBe("Address")
 })
 
 })

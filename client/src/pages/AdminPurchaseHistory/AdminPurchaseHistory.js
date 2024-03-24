@@ -24,7 +24,7 @@ return (
     <table>
 
     <thead>
-        <tr>
+        <tr data-testid="table-headers-row">
             <th>order №</th>
             <th>Brand</th>
             <th>Model</th>
