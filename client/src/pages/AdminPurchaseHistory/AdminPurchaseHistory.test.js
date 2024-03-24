@@ -45,7 +45,15 @@ describe("AdminPurchaseHistory component", () => {
             "_id": "64d0b8583b883b3568283898",
             "date": "2023-08-07T09:24:40.427Z"
         },
-    ]
+    ];
+
+    beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
 test("should have title 'All purchases made by users'", async() => {
 
@@ -128,6 +136,42 @@ test("first purchase should be displayed with correct details", async() => {
     expect(firstOrderName).toBeInTheDocument()
     expect(firstOrderAddress[0]).toBeInTheDocument()
     expect(firstOrderPhone).toBeInTheDocument()
+})
+
+test("should have and use 'TableRowElement' component if there are purchases", async() => {
+
+    adminPurchaseHistory.mockResolvedValue({data:mockAdminHistory})
+   
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+            <AdminPurchaseHistory />
+        </MemoryRouter>
+        </Provider>
+    )
+
+    const tableRowElementComponents = await screen.findAllByTestId('table-row')
+    expect(tableRowElementComponents.length).toBeGreaterThan(0)
+    expect(tableRowElementComponents.length).toBe(mockAdminHistory.length)
+
+    adminPurchaseHistory.mockRestore()
+})
+
+test("should not have 'TableRowElement' component if there are no purchases made", async() => {
+
+    adminPurchaseHistory.mockResolvedValue({data:[]})
+    store.dispatch(confirmedGetAdminPurchaseHistoryAction([]))
+   
+    render(
+        <Provider store={store}>
+        <MemoryRouter>
+            <AdminPurchaseHistory />
+        </MemoryRouter>
+        </Provider>
+    )
+
+    const tableRowElementComponents = screen.queryAllByTestId('table-row')
+    expect(tableRowElementComponents.length).toBe(0)
 })
 
 })

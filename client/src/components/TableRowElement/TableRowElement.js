@@ -7,7 +7,7 @@ function TableRowElement({type,details}) {
     if(isAdminTable) {
         return (
             <>
-        <tr key={details._id}>
+        <tr key={details._id} data-testid="table-row">
             <td>{details._id}</td>
             <td>{details.watchId.brand}</td>
             <td>{details.watchId.model}</td>
