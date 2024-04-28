@@ -161,6 +161,10 @@ This is Single Page application built with React,Redux,Axios.
 9. Start the application: `npm start`
 
 
+### Tests:
+To run tests: `npm run test`
+
+
 ### Routes:
 
 Here are the available routes:
@@ -304,5 +308,14 @@ Redux state chart
  Loading Spinner
 
  ![17 loadingSpinner](https://github.com/igachev/WatchShop-React/assets/102420254/d9250b67-199e-47d5-9e79-f876c06895ea)
+
+</p>
+
+
+<p align="center">
+ Unit Tests with Jest and React Testing Library
+
+![19 test1](https://github.com/igachev/WatchShop-React/assets/102420254/753a4e6a-24ff-4897-9dc7-1efe2acf9df6)
+![20 test2](https://github.com/igachev/WatchShop-React/assets/102420254/50d6e48b-1eb1-4645-a53c-a6a2cf6e7640)
 
 </p>
